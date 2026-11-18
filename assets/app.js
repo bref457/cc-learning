@@ -1,6 +1,6 @@
 /* =========================================================
    Claude Code Lernwiki – gemeinsames Verhalten für alle Seiten
-   Suche · Dunkelmodus · Fortschritt · Tabs · Kopieren · Quiz · Merkkarten
+   Suche · Dunkelmodus · Tabs · Kopieren · Quiz · Merkkarten
    ========================================================= */
 (function () {
   "use strict";
@@ -63,49 +63,9 @@
     show(group ? Math.min(store.get("tab:" + group, 0), buttons.length - 1) : 0);
   });
 
-  /* ---------- Lese-Fortschritt + Inhaltsverzeichnis ---------- */
+  /* ---------- Inhaltsverzeichnis: aktuellen Abschnitt hervorheben ---------- */
   const allSections = $$("section.lesson[id]");
-  const lessons = allSections.filter(s => s.dataset.noread === undefined);
-  const readKey = "read:" + PAGE;
-  let read = new Set(store.get(readKey, []));
-
-  function updateProgress() {
-    $$(".sidebar .toc a").forEach(a => {
-      const id = a.getAttribute("href").slice(1);
-      a.classList.toggle("read", read.has(id));
-    });
-    $$(".mark-read").forEach(b => {
-      const id = b.closest("section").id;
-      const done = read.has(id);
-      b.classList.toggle("done", done);
-      b.textContent = done ? "✓ Gelesen" : "Als gelesen markieren";
-    });
-    const pct = lessons.length ? Math.round(read.size / lessons.length * 100) : 0;
-    const bar = $(".progress .bar span"); if (bar) bar.style.width = pct + "%";
-    const lbl = $(".progress small"); if (lbl) lbl.textContent = read.size + " von " + lessons.length + " Abschnitten gelesen (" + pct + " %)";
-    store.set("pct:" + PAGE, pct);
-  }
-  lessons.forEach(sec => {
-    const btn = document.createElement("button");
-    btn.className = "mark-read"; btn.type = "button";
-    btn.addEventListener("click", () => {
-      read.has(sec.id) ? read.delete(sec.id) : read.add(sec.id);
-      store.set(readKey, Array.from(read)); updateProgress();
-    });
-    sec.appendChild(btn);
-  });
-  // Auch „gelesen“, wenn man bis zum Ende eines Abschnitts gescrollt hat
   if ("IntersectionObserver" in window) {
-    const endObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const id = e.target.closest("section").id;
-          if (!read.has(id)) { read.add(id); store.set(readKey, Array.from(read)); updateProgress(); }
-        }
-      });
-    }, { threshold: 1 });
-    $$(".mark-read").forEach(b => endObs.observe(b));
-
     const spy = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -115,15 +75,6 @@
     }, { rootMargin: "-30% 0px -65% 0px" });
     allSections.forEach(s => spy.observe(s));
   }
-  updateProgress();
-  const resetBtn = $("#reset-progress");
-  if (resetBtn) resetBtn.addEventListener("click", () => { read = new Set(); store.set(readKey, []); updateProgress(); });
-
-  /* ---------- Startseite: Fortschritt pro Kapitel ---------- */
-  $$("[data-progress-of]").forEach(el => {
-    const pct = store.get("pct:" + el.dataset.progressOf, 0);
-    el.textContent = pct > 0 ? pct + " % gelesen" : "Bereit";
-  });
 
   /* ---------- Suche ---------- */
   const input = $("#search");
