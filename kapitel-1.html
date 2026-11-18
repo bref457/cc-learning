@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kapitel 1 · Grundlagen – Claude Code Lernwiki</title>
+<meta name="description" content="Was Claude Code ist, wie es arbeitet, wie du es installierst und wo es läuft: lokal, in der Cloud oder per Remote Control.">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=JSON.parse(localStorage.getItem("ccwiki:theme"));if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body data-page="kapitel-1">
+
+<!-- ===================== Kopfzeile ===================== -->
+<header class="topbar">
+  <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menü">☰</button>
+  <a class="brand" href="index.html"><span class="logo">✳</span><span class="txt">Claude Code Lernwiki</span></a>
+  <div class="search-wrap">
+    <span class="icon">🔍</span>
+    <input id="search" type="search" placeholder="Suchen … (Taste /)" autocomplete="off" aria-label="Suchen">
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <button class="icon-btn" id="theme-toggle" aria-label="Hell/Dunkel umschalten">🌙</button>
+</header>
+
+<div class="layout">
+<!-- ===================== Seitenleiste ===================== -->
+<nav class="sidebar">
+  <h4>Kapitel</h4>
+  <a href="index.html">🏠 Startseite</a>
+  <a href="kapitel-1.html" class="current">1 · Grundlagen</a>
+  <a class="disabled">2 · Richtig arbeiten</a>
+  <a class="disabled">3 · Gedächtnis &amp; Kontext</a>
+  <a class="disabled">4 · Sicherheit</a>
+  <a class="disabled">5 · Erweitern</a>
+  <a class="disabled">6 · Agenten</a>
+  <a class="disabled">7 · Automatisieren</a>
+  <a class="disabled">8 · Oberflächen</a>
+  <a class="disabled">9 · Nachschlagen</a>
+
+  <h4>In diesem Kapitel</h4>
+  <div class="progress"><div class="bar"><span></span></div><small></small></div>
+  <div class="toc">
+    <a href="#was-ist"><span class="dot"></span>Was ist Claude Code?</a>
+    <a href="#schleife"><span class="dot"></span>Die Arbeitsschleife</a>
+    <a href="#zugriff"><span class="dot"></span>Worauf Claude zugreift</a>
+    <a href="#installation"><span class="dot"></span>Installation</a>
+    <a href="#erste-sitzung"><span class="dot"></span>Deine erste Sitzung</a>
+    <a href="#befehle"><span class="dot"></span>Die wichtigsten Befehle</a>
+    <a href="#sicherheit"><span class="dot"></span>Checkpoints &amp; Modi</a>
+    <a href="#sitzungen"><span class="dot"></span>Sitzungen &amp; Kontext</a>
+    <a href="#lokal-cloud"><span class="dot"></span>Lokal, Cloud oder Remote</a>
+    <a href="#plattformen"><span class="dot"></span>Die Oberflächen</a>
+    <a href="#unterwegs"><span class="dot"></span>Arbeiten von unterwegs</a>
+    <a href="#projekte-mods"><span class="dot"></span>Projekte, Mods &amp; mehr</a>
+    <a href="#tipps"><span class="dot"></span>Tipps für den Start</a>
+    <a href="#faq"><span class="dot"></span>Häufige Fragen</a>
+    <a href="#quiz-sec"><span class="dot"></span>Quiz</a>
+    <a href="#karten"><span class="dot"></span>Merkkarten</a>
+  </div>
+  <h4>Fortschritt</h4>
+  <a href="#" id="reset-progress" onclick="return false">↺ Fortschritt zurücksetzen</a>
+</nav>
+
+<!-- ===================== Inhalt ===================== -->
+<main>
+<div class="content">
+
+<div class="hero">
+  <div class="kicker">Kapitel 1 von 9</div>
+  <h1>Grundlagen: Claude Code verstehen und starten</h1>
+  <p>Was Claude Code eigentlich ist, wie es im Hintergrund arbeitet, wie du es installierst und wo es überall läuft: auf deinem PC, in der Cloud oder auf dem Handy.</p>
+  <div class="meta">
+    <span class="chip">⏱️ ca. 35 Minuten</span>
+    <span class="chip">🎯 Einsteiger</span>
+    <span class="chip">❓ 12 Quizfragen</span>
+    <span class="chip">🃏 16 Merkkarten</span>
+  </div>
+</div>
+
+<!-- ============ 1 ============ -->
+<section class="lesson" id="was-ist" data-keywords="agent assistent ki chatbot definition überblick">
+  <div class="sec-head"><span class="sec-num">1</span><h2>Was ist Claude Code?</h2></div>
+  <p class="lead">Claude Code ist ein KI-Assistent, der nicht nur redet, sondern selbst anpackt: Er liest dein Projekt, ändert Dateien, führt Befehle aus und prüft, ob alles funktioniert.</p>
+
+  <p>Stell dir einen erfahrenen Kollegen vor, der sich an deinen Rechner setzen darf. Du sagst ihm, was du willst, zum Beispiel „Die Anmeldung zeigt nach einem falschen Passwort eine leere Seite, bitte reparieren“. Er sucht die passenden Dateien, liest den Code, macht die Änderung, startet die Tests und sagt dir, was er gemacht hat. Genau das ist Claude Code.</p>
+  <p>Man nennt so etwas einen <strong>Agenten</strong>. Ein normaler Chatbot gibt dir nur Text zurück, den du selbst kopieren und ausprobieren musst. Ein Agent erledigt die Schritte selbst.</p>
+
+  <div class="grid c3">
+    <div class="card"><div class="emoji">💬</div><h4>Chatbot</h4><p>Beantwortet Fragen. Du kopierst den Code selbst und probierst ihn aus.</p><span class="tag">sieht nur, was du einfügst</span></div>
+    <div class="card"><div class="emoji">⌨️</div><h4>Autovervollständigung</h4><p>Schlägt die nächste Zeile in der offenen Datei vor.</p><span class="tag">sieht nur die aktuelle Datei</span></div>
+    <div class="card" style="border-color:var(--accent)"><div class="emoji">🤖</div><h4>Claude Code (Agent)</h4><p>Plant, liest, ändert mehrere Dateien, führt Befehle aus und prüft das Ergebnis.</p><span class="tag">sieht das ganze Projekt</span></div>
+  </div>
+
+  <h3>Wofür du es nutzen kannst</h3>
+  <div class="grid c2">
+    <div class="card"><div class="emoji">🛠️</div><h4>Funktionen bauen &amp; Fehler beheben</h4><p>Beschreib in normaler Sprache, was du willst, oder füge eine Fehlermeldung ein.</p></div>
+    <div class="card"><div class="emoji">🧹</div><h4>Lästige Routinearbeit</h4><p>Tests schreiben, Lint-Fehler aufräumen, Abhängigkeiten aktualisieren, Merge-Konflikte lösen.</p></div>
+    <div class="card"><div class="emoji">🌿</div><h4>Git &amp; Pull Requests</h4><p>Commits mit guter Nachricht, neue Branches, Pull Requests öffnen.</p></div>
+    <div class="card"><div class="emoji">🔌</div><h4>Andere Tools anbinden</h4><p>Über MCP kann Claude z. B. Google Drive, Jira oder Slack nutzen.</p></div>
+    <div class="card"><div class="emoji">📜</div><h4>Skripte &amp; Automatisierung</h4><p>Logs hineinleiten, in CI laufen lassen, mit anderen Tools verketten.</p></div>
+    <div class="card"><div class="emoji">⏰</div><h4>Wiederkehrende Aufgaben</h4><p>Z. B. jeden Morgen offene Pull Requests prüfen lassen.</p></div>
+  </div>
+
+  <div class="box merke"><div class="box-title">📌 Merke</div>
+    <p>Claude Code ist nicht nur für Programmierer. Alles, was man in einer Kommandozeile machen kann, kann Claude auch: Texte und Doku schreiben, Dateien sortieren, Daten auswerten, recherchieren.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/overview" target="_blank" rel="noopener">📖 Original: Übersicht ↗</a>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="lesson" id="schleife" data-keywords="agentic loop agentische schleife kontext handeln prüfen modell tools harness sonnet opus">
+  <div class="sec-head"><span class="sec-num">2</span><h2>Die Arbeitsschleife: so denkt und handelt Claude</h2></div>
+  <p class="lead">Jede Aufgabe läuft in einer Schleife aus drei Phasen ab, bis das Ziel erreicht ist. Du kannst jederzeit eingreifen.</p>
+
+  <figure class="diagram" data-stepper>
+    <svg viewBox="0 0 720 330" role="img" aria-label="Diagramm der Arbeitsschleife">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c96442"/></marker>
+        <marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8f897d"/></marker>
+      </defs>
+      <!-- Du -->
+      <g data-node="prompt">
+        <rect x="20" y="130" width="130" height="70" rx="14" class="svg-blue"/>
+        <text x="85" y="160" text-anchor="middle" class="svg-t">🧑 Du</text>
+        <text x="85" y="182" text-anchor="middle" class="svg-s">gibst die Aufgabe</text>
+      </g>
+      <path d="M150 165 L218 165" class="svg-arrow" marker-end="url(#ahg)"/>
+      <!-- Kreis -->
+      <circle cx="385" cy="165" r="120" fill="none" stroke="var(--line)" stroke-width="2" stroke-dasharray="6 6"/>
+      <g data-node="kontext">
+        <rect x="300" y="20" width="170" height="64" rx="14" class="svg-accent"/>
+        <text x="385" y="48" text-anchor="middle" class="svg-t">🔎 Kontext sammeln</text>
+        <text x="385" y="68" text-anchor="middle" class="svg-s">Dateien lesen, suchen</text>
+      </g>
+      <g data-node="handeln">
+        <rect x="440" y="210" width="170" height="64" rx="14" class="svg-accent"/>
+        <text x="525" y="238" text-anchor="middle" class="svg-t">✍️ Handeln</text>
+        <text x="525" y="258" text-anchor="middle" class="svg-s">Code ändern, Befehle</text>
+      </g>
+      <g data-node="pruefen">
+        <rect x="220" y="210" width="150" height="64" rx="14" class="svg-accent"/>
+        <text x="295" y="238" text-anchor="middle" class="svg-t">✅ Prüfen</text>
+        <text x="295" y="258" text-anchor="middle" class="svg-s">Tests, Ergebnis checken</text>
+      </g>
+      <path d="M470 70 Q560 110 545 205" class="svg-arrow-accent" marker-end="url(#ah)"/>
+      <path d="M438 255 L375 255" class="svg-arrow-accent" marker-end="url(#ah)"/>
+      <path d="M250 208 Q230 110 298 65" class="svg-arrow-accent" marker-end="url(#ah)"/>
+      <!-- Fertig -->
+      <g data-node="fertig">
+        <rect x="590" y="20" width="115" height="64" rx="14" class="svg-green"/>
+        <text x="647" y="48" text-anchor="middle" class="svg-t">🏁 Fertig</text>
+        <text x="647" y="68" text-anchor="middle" class="svg-s">Bericht an dich</text>
+      </g>
+      <path d="M472 40 L588 40" class="svg-arrow" stroke-dasharray="4 4" marker-end="url(#ahg)"/>
+      <!-- Eingreifen -->
+      <g data-node="esc">
+        <rect x="20" y="250" width="170" height="56" rx="12" class="svg-yellow"/>
+        <text x="105" y="274" text-anchor="middle" class="svg-t">✋ Eingreifen</text>
+        <text x="105" y="293" text-anchor="middle" class="svg-s">jederzeit mit Esc</text>
+      </g>
+    </svg>
+    <div class="loop-steps">
+      <button type="button" data-step="prompt" data-text="<b>1. Du gibst eine Aufgabe.</b> Zum Beispiel: „Behebe die fehlschlagenden Tests.“ Du musst nicht sagen, welche Dateien Claude lesen soll, das findet es selbst heraus.">1 · Aufgabe</button>
+      <button type="button" data-step="kontext" data-text="<b>2. Kontext sammeln.</b> Claude startet die Tests, liest die Fehlermeldung, sucht die passenden Dateien und liest sie, um den Code zu verstehen.">2 · Kontext</button>
+      <button type="button" data-step="handeln" data-text="<b>3. Handeln.</b> Claude bearbeitet die Dateien, um das Problem zu beheben. Je nach Modus fragt es dich vorher um Erlaubnis.">3 · Handeln</button>
+      <button type="button" data-step="pruefen" data-text="<b>4. Prüfen.</b> Claude startet die Tests erneut. Schlagen sie noch fehl, beginnt die Schleife von vorn, mit dem, was es gerade gelernt hat.">4 · Prüfen</button>
+      <button type="button" data-step="fertig" data-text="<b>5. Fertig.</b> Wenn alles passt, fasst Claude zusammen, was es gemacht hat. Eine reine Frage braucht oft nur Phase 2, ein Umbau dagegen viele Runden.">5 · Fertig</button>
+      <button type="button" data-step="esc" data-text="<b>Du bist Teil der Schleife.</b> Mit <kbd>Esc</kbd> stoppst du Claude sofort. Oder du tippst einfach eine Korrektur und drückst <kbd>Enter</kbd>: Claude liest sie nach dem aktuellen Schritt und passt sich an.">✋ Eingreifen</button>
+    </div>
+    <div class="loop-explain"></div>
+    <figcaption>Klick auf die Schritte, um sie nacheinander zu sehen.</figcaption>
+  </figure>
+
+  <h3>Zwei Zutaten: ein Modell, das denkt, und Tools, die handeln</h3>
+  <div class="grid c2">
+    <div class="card"><div class="emoji">🧠</div><h4>Das Modell</h4><p>Das Claude-Modell versteht Code in jeder Sprache, plant die Schritte und entscheidet, was als Nächstes passiert. Es gibt mehrere Modelle: <b>Sonnet</b> reicht für die meisten Aufgaben, <b>Opus</b> denkt bei schwierigen Architekturfragen gründlicher. Wechseln mit <code>/model</code>.</p></div>
+    <div class="card"><div class="emoji">🧰</div><h4>Die Tools</h4><p>Ohne Tools könnte Claude nur Text schreiben. Mit Tools kann es Dateien lesen und bearbeiten, Befehle ausführen, im Web suchen und andere Dienste ansprechen.</p></div>
+  </div>
+  <p><strong>Claude Code</strong> selbst ist die Schicht dazwischen: Es stellt dem Modell die Tools bereit und entscheidet, welchen Kontext das Modell sieht. Diese Schicht nennt man auch <em>Harness</em> (Geschirr, wie beim Pferd).</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>Tool-Art</th><th>Was Claude damit tun kann</th></tr>
+    <tr><td>📄 Dateien</td><td>lesen, bearbeiten, neu anlegen, umbenennen, umsortieren</td></tr>
+    <tr><td>🔎 Suche</td><td>Dateien nach Namen finden, Inhalte durchsuchen, ein Projekt erkunden</td></tr>
+    <tr><td>▶️ Ausführen</td><td>Kommandozeilenbefehle, Server starten, Tests laufen lassen, git</td></tr>
+    <tr><td>🌐 Web</td><td>im Internet suchen, Dokumentation abrufen, Fehlermeldungen nachschlagen</td></tr>
+    <tr><td>🧩 Code-Intelligenz</td><td>Typfehler sehen, zur Definition springen (braucht ein Plugin)</td></tr>
+  </table></div>
+
+  <div class="box tipp"><div class="box-title">💡 Tipp</div>
+    <p>Die eingebauten Tools sind nur die Basis. Mit Skills, MCP, Hooks und Subagenten kannst du Claude später erweitern. Das ist Thema in <b>Kapitel 5 und 6</b>.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/how-claude-code-works" target="_blank" rel="noopener">📖 Original: So funktioniert Claude Code ↗</a>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="lesson" id="zugriff" data-keywords="zugriff projekt terminal git claude.md auto memory gedächtnis agents.md">
+  <div class="sec-head"><span class="sec-num">3</span><h2>Worauf Claude zugreifen kann</h2></div>
+  <p class="lead">Wenn du <code>claude</code> in einem Ordner startest, ist dieser Ordner Claudes Arbeitsplatz.</p>
+
+  <div class="grid c2">
+    <div class="card"><div class="emoji">📁</div><h4>Dein Projekt</h4><p>Alle Dateien im Ordner und in Unterordnern. Dateien woanders nur mit deiner Erlaubnis.</p></div>
+    <div class="card"><div class="emoji">🖥️</div><h4>Dein Terminal</h4><p>Jeder Befehl, den du selbst ausführen könntest: Build-Tools, git, Paketmanager, Skripte.</p></div>
+    <div class="card"><div class="emoji">🌿</div><h4>Dein Git-Stand</h4><p>Aktueller Branch, nicht gespeicherte Änderungen, letzte Commits.</p></div>
+    <div class="card"><div class="emoji">📝</div><h4>CLAUDE.md</h4><p>Eine Textdatei mit Regeln und Hinweisen zu deinem Projekt, die Claude bei jedem Start liest.</p></div>
+    <div class="card"><div class="emoji">🧠</div><h4>Auto-Memory</h4><p>Notizen, die Claude sich selbst macht, z. B. deine Vorlieben. Werden beim Start geladen.</p></div>
+    <div class="card"><div class="emoji">🔌</div><h4>Erweiterungen</h4><p>MCP-Server, Skills, Subagenten und Claude in Chrome, sofern du sie eingerichtet hast.</p></div>
+  </div>
+
+  <div class="box info"><div class="box-title">ℹ️ Warum das wichtig ist</div>
+    <p>Weil Claude das ganze Projekt sieht, kann es Änderungen über viele Dateien hinweg abstimmen. Ein Assistent, der nur die offene Datei kennt, kann das nicht.</p>
+  </div>
+  <p>Mehr zu <code>CLAUDE.md</code> und dem Gedächtnis kommt in <b>Kapitel 3</b>.</p>
+  <a class="source" href="https://code.claude.com/docs/de/how-claude-code-works#worauf-claude-zugreifen-kann" target="_blank" rel="noopener">📖 Original: Worauf Claude zugreifen kann ↗</a>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="lesson" id="installation" data-keywords="installieren install windows powershell cmd winget mac linux homebrew wsl path git für windows version update">
+  <div class="sec-head"><span class="sec-num">4</span><h2>Installation</h2></div>
+  <p class="lead">Ein einziger Befehl im Terminal genügt. Wähle dein System.</p>
+
+  <div class="box info"><div class="box-title">ℹ️ Was du brauchst</div>
+    <ul>
+      <li>Ein Terminal (unter Windows: PowerShell oder CMD)</li>
+      <li>Ein Projekt oder einen Ordner zum Arbeiten</li>
+      <li>Ein Claude-Abo (Pro, Max, Ultra, Team oder Enterprise) oder ein Konto in der Claude Console</li>
+    </ul>
+  </div>
+
+  <div class="tabs" data-group="os">
+    <div class="tab-list">
+      <button type="button">🪟 Windows PowerShell</button>
+      <button type="button">🪟 Windows CMD</button>
+      <button type="button">🪟 WinGet</button>
+      <button type="button">🍎 macOS / 🐧 Linux / WSL</button>
+      <button type="button">🍺 Homebrew</button>
+    </div>
+    <div class="tab-panel">
+      <p>Du bist in PowerShell, wenn vorne <code>PS C:\</code> steht.</p>
+      <div class="code"><span class="label">PowerShell</span><pre>irm https://claude.ai/install.ps1 | iex</pre></div>
+      <p>✔ Aktualisiert sich danach automatisch im Hintergrund.</p>
+    </div>
+    <div class="tab-panel">
+      <p>Du bist in CMD, wenn vorne nur <code>C:\</code> ohne „PS“ steht.</p>
+      <div class="code"><span class="label">CMD</span><pre>curl -fsSL https://claude.ai/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd</pre></div>
+      <p>✔ Aktualisiert sich danach automatisch im Hintergrund.</p>
+    </div>
+    <div class="tab-panel">
+      <div class="code"><span class="label">PowerShell</span><pre>winget install Anthropic.ClaudeCode</pre></div>
+      <p>⚠ Kein automatisches Update. Ab und zu ausführen: <code>winget upgrade Anthropic.ClaudeCode</code></p>
+    </div>
+    <div class="tab-panel">
+      <div class="code"><span class="label">Bash</span><pre>curl -fsSL https://claude.ai/install.sh | bash</pre></div>
+      <p>✔ Aktualisiert sich danach automatisch im Hintergrund.</p>
+    </div>
+    <div class="tab-panel">
+      <div class="code"><span class="label">Bash</span><pre>brew install --cask claude-code</pre></div>
+      <p><code>claude-code</code> ist der stabile Kanal (etwa eine Woche hinter dem neuesten Stand), <code>claude-code@latest</code> bekommt jede neue Version sofort.<br>⚠ Kein automatisches Update: <code>brew upgrade claude-code</code></p>
+    </div>
+  </div>
+
+  <h3>Prüfen, ob es geklappt hat</h3>
+  <p>Der Installer zeigt keinen Fortschritt an, also nicht wundern. Öffne danach ein <b>neues</b> Terminal-Fenster und tippe:</p>
+  <div class="code"><span class="label">Terminal</span><pre>claude --version</pre></div>
+  <p>Wenn eine Versionsnummer mit „(Claude Code)“ erscheint, ist alles bereit.</p>
+
+  <details class="acc"><summary>❌ „claude“ wird nicht gefunden oder nicht erkannt</summary><div class="acc-body">
+    <p>Der Installationsordner ist noch nicht im <b>PATH</b>, der Liste der Orte, an denen das System nach Programmen sucht. Zuerst ein neues Terminal öffnen. Hilft das nicht, folge der Anleitung <a href="https://code.claude.com/docs/de/troubleshoot-install#command-not-found-claude-after-installation" target="_blank" rel="noopener">PATH reparieren ↗</a>.</p>
+  </div></details>
+  <details class="acc"><summary>❌ „The token '&amp;&amp;' is not a valid statement separator“</summary><div class="acc-body">
+    <p>Du hast den CMD-Befehl in PowerShell eingegeben. Nimm den PowerShell-Befehl.</p>
+  </div></details>
+  <details class="acc"><summary>❌ „'irm' is not recognized …“</summary><div class="acc-body">
+    <p>Umgekehrt: Du bist in CMD und hast den PowerShell-Befehl genommen. Nimm den CMD-Befehl.</p>
+  </div></details>
+
+  <div class="box tipp"><div class="box-title">💡 Tipp für Windows</div>
+    <p>Installiere zusätzlich <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">Git für Windows</a>. Dann kann Claude die Bash-Shell nutzen, mit der es am besten umgehen kann. Ohne Git nimmt es PowerShell.</p>
+  </div>
+
+  <div class="box beispiel"><div class="box-title">🧭 Keine Lust aufs Terminal?</div>
+    <p>Die <b>Desktop-App</b> (Windows und Mac) enthält Claude Code bereits. Installieren, anmelden, auf den Tab <b>Code</b> klicken, fertig. Oder ganz ohne Installation im Browser unter <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>. Mehr dazu in <a href="#plattformen">Abschnitt 10</a>.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/quickstart" target="_blank" rel="noopener">📖 Original: Schnellstart ↗</a>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="lesson" id="erste-sitzung" data-keywords="anmelden login erste schritte quickstart sitzung starten prompt git commit api key">
+  <div class="sec-head"><span class="sec-num">5</span><h2>Deine erste Sitzung</h2></div>
+  <p class="lead">In sieben kleinen Schritten von der leeren Kommandozeile zur ersten echten Änderung.</p>
+
+  <ol class="steps">
+    <li><strong>In den Projektordner wechseln und starten</strong>
+      <div class="code"><span class="label">Terminal</span><pre>cd C:\Dev\mein-projekt
+claude</pre></div>
+    </li>
+    <li><strong>Anmelden</strong>
+      Beim ersten Start öffnet sich der Browser zur Anmeldung. Danach bleibst du angemeldet. Konto wechseln geht später mit <code>/login</code>.
+      <div class="table-wrap"><table>
+        <tr><th>Kontoart</th><th>Für wen</th></tr>
+        <tr><td>Claude Pro, Max, Ultra, Team, Enterprise</td><td>Empfohlen. Läuft über dein Abo.</td></tr>
+        <tr><td>Claude Console</td><td>Bezahlung pro Nutzung mit vorab gekauftem Guthaben (API).</td></tr>
+      </table></div>
+    </li>
+    <li><strong>Erste Frage stellen</strong>
+      Oben siehst du Version, Modell und Ordner. Frag einfach:
+      <div class="code"><span class="label">Prompt</span><pre>Was macht dieses Projekt?
+Welche Technologien werden verwendet?
+Erklär mir die Ordnerstruktur.</pre></div>
+      Du musst keine Dateien angeben. Claude liest selbst, was es braucht.
+    </li>
+    <li><strong>Erste Änderung</strong>
+      <div class="code"><span class="label">Prompt</span><pre>Füge der Hauptdatei eine Hallo-Welt-Funktion hinzu.</pre></div>
+      Claude zeigt dir die Änderung. Wenn es fragt, bestätige mit <b>Yes</b>.
+    </li>
+    <li><strong>Git im Gespräch nutzen</strong>
+      <div class="code"><span class="label">Prompt</span><pre>Welche Dateien habe ich geändert?
+Committe meine Änderungen mit einer passenden Nachricht.
+Leg einen neuen Branch feature/start an.</pre></div>
+    </li>
+    <li><strong>Einen Fehler beheben</strong>
+      <div class="code"><span class="label">Prompt</span><pre>Man kann das Formular leer absenden. Bitte beheben.</pre></div>
+    </li>
+    <li><strong>Weitere Ideen ausprobieren</strong>
+      Code umbauen, Tests schreiben, die README ergänzen oder „Prüf meine Änderungen und schlag Verbesserungen vor“.
+    </li>
+  </ol>
+
+  <div class="box tipp"><div class="box-title">💡 Sprache</div>
+    <p>Du kannst mit Claude auf Deutsch schreiben. Die Beispiele in der Originaldoku sind auf Englisch, funktionieren aber genauso auf Deutsch.</p>
+  </div>
+  <div class="box merke"><div class="box-title">📌 Merke</div>
+    <p>Sprich mit Claude wie mit einem hilfsbereiten Kollegen: Sag, was du erreichen willst, nicht jeden einzelnen Handgriff.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/quickstart" target="_blank" rel="noopener">📖 Original: Schnellstart ↗</a>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="lesson" id="befehle" data-keywords="befehle commands cli claude -p -c -r clear help exit model init doctor slash spickzettel shortcuts tastenkürzel">
+  <div class="sec-head"><span class="sec-num">6</span><h2>Die wichtigsten Befehle</h2></div>
+  <p class="lead">Es gibt zwei Arten: Befehle fürs Terminal (zum Starten) und Befehle in der laufenden Sitzung (beginnen mit <code>/</code>).</p>
+
+  <h3>Im Terminal</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Befehl</th><th>Was er tut</th></tr>
+    <tr><td><code>claude</code></td><td>Startet eine Sitzung im aktuellen Ordner</td></tr>
+    <tr><td><code>claude "Aufgabe"</code></td><td>Startet und schickt gleich die erste Aufgabe</td></tr>
+    <tr><td><code>claude -p "Frage"</code></td><td>Einmalige Antwort, danach Ende (gut für Skripte)</td></tr>
+    <tr><td><code>claude -c</code></td><td>Setzt das letzte Gespräch in diesem Ordner fort</td></tr>
+    <tr><td><code>claude -r</code></td><td>Zeigt frühere Gespräche zur Auswahl</td></tr>
+    <tr><td><code>claude --version</code></td><td>Zeigt die installierte Version</td></tr>
+  </table></div>
+
+  <h3>In der Sitzung</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Befehl / Taste</th><th>Was er tut</th></tr>
+    <tr><td><code>/</code></td><td>Zeigt alle Befehle und Skills</td></tr>
+    <tr><td><code>/help</code></td><td>Hilfe anzeigen</td></tr>
+    <tr><td><code>/clear</code></td><td>Neues Gespräch beginnen (altes bleibt über <code>/resume</code> erreichbar)</td></tr>
+    <tr><td><code>/resume</code></td><td>Früheres Gespräch fortsetzen</td></tr>
+    <tr><td><code>/model</code></td><td>Modell wechseln</td></tr>
+    <tr><td><code>/init</code></td><td>Erstellt eine erste <code>CLAUDE.md</code> für dein Projekt</td></tr>
+    <tr><td><code>/doctor</code></td><td>Prüft Installation und Einstellungen und hilft beim Reparieren</td></tr>
+    <tr><td><code>/context</code></td><td>Zeigt, was gerade Platz im Kontext belegt</td></tr>
+    <tr><td><code>/login</code></td><td>Neu anmelden oder Konto wechseln</td></tr>
+    <tr><td><code>/exit</code> oder 2× <kbd>Ctrl</kbd>+<kbd>D</kbd></td><td>Claude Code beenden</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>Claude sofort stoppen</td></tr>
+    <tr><td>2× <kbd>Esc</kbd></td><td>Zurückspulen zu einem früheren Stand</td></tr>
+    <tr><td><kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Berechtigungsmodus wechseln</td></tr>
+    <tr><td><kbd>↑</kbd> / <kbd>Tab</kbd></td><td>Frühere Eingaben / Befehl vervollständigen</td></tr>
+  </table></div>
+  <a class="source" href="https://code.claude.com/docs/de/commands" target="_blank" rel="noopener">📖 Original: Alle Befehle ↗</a>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="lesson" id="sicherheit" data-keywords="checkpoint rückgängig zurückspulen rewind esc berechtigungen berechtigungsmodus auto manual accept edits plan shift+tab sicherheit">
+  <div class="sec-head"><span class="sec-num">7</span><h2>Sicherheitsnetz: Checkpoints und Berechtigungsmodi</h2></div>
+  <p class="lead">Zwei Mechanismen sorgen dafür, dass du die Kontrolle behältst.</p>
+
+  <div class="grid c2">
+    <div class="card"><div class="emoji">⏪</div><h4>Checkpoints</h4><p>Bevor Claude eine Datei ändert, merkt es sich den alten Inhalt. Mit <kbd>Esc</kbd> <kbd>Esc</kbd> spulst du zurück, oder du sagst einfach „mach das rückgängig“.</p></div>
+    <div class="card"><div class="emoji">🚦</div><h4>Berechtigungen</h4><p>Legen fest, was Claude ohne Nachfrage tun darf. Wechseln mit <kbd>Shift</kbd>+<kbd>Tab</kbd>.</p></div>
+  </div>
+
+  <div class="box achtung"><div class="box-title">⚠️ Achtung</div>
+    <p>Checkpoints decken nur <b>Dateien</b> ab. Was Claude außerhalb deines Rechners auslöst (Datenbank, E-Mail, Deployment), lässt sich nicht zurückspulen. Dafür sind die Berechtigungen da.</p>
+  </div>
+
+  <h3>Die Berechtigungsmodi</h3>
+  <figure class="diagram">
+    <svg viewBox="0 0 720 150" role="img" aria-label="Berechtigungsmodi von vorsichtig bis selbstständig">
+      <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#2f6fb3"/><stop offset="1" stop-color="#c96442"/></linearGradient></defs>
+      <rect x="30" y="112" width="660" height="8" rx="4" fill="url(#g1)"/>
+      <text x="30" y="142" class="svg-s">mehr Kontrolle durch dich</text>
+      <text x="690" y="142" text-anchor="end" class="svg-s">mehr Selbstständigkeit</text>
+      <g><rect x="20" y="14" width="150" height="80" rx="12" class="svg-blue"/><text x="95" y="44" text-anchor="middle" class="svg-t">📋 Plan</text><text x="95" y="66" text-anchor="middle" class="svg-s">nur erkunden und</text><text x="95" y="82" text-anchor="middle" class="svg-s">Plan vorschlagen</text></g>
+      <g><rect x="195" y="14" width="150" height="80" rx="12" class="svg-box"/><text x="270" y="44" text-anchor="middle" class="svg-t">✋ Manual</text><text x="270" y="66" text-anchor="middle" class="svg-s">fragt vor Änderungen</text><text x="270" y="82" text-anchor="middle" class="svg-s">und Befehlen</text></g>
+      <g><rect x="370" y="14" width="150" height="80" rx="12" class="svg-yellow"/><text x="445" y="44" text-anchor="middle" class="svg-t">✏️ Accept edits</text><text x="445" y="66" text-anchor="middle" class="svg-s">ändert Dateien frei,</text><text x="445" y="82" text-anchor="middle" class="svg-s">fragt bei Befehlen</text></g>
+      <g><rect x="545" y="14" width="155" height="80" rx="12" class="svg-accent"/><text x="622" y="44" text-anchor="middle" class="svg-t">🤖 Auto</text><text x="622" y="66" text-anchor="middle" class="svg-s">Prüfer blockt Riskantes,</text><text x="622" y="82" text-anchor="middle" class="svg-s">Rest läuft ohne Frage</text></g>
+    </svg>
+    <figcaption>Mit <kbd>Shift</kbd>+<kbd>Tab</kbd> wechselst du zwischen den Modi.</figcaption>
+  </figure>
+
+  <div class="table-wrap"><table>
+    <tr><th>Modus</th><th>Wann sinnvoll</th></tr>
+    <tr><td><b>Plan</b></td><td>Du willst erst sehen, wie Claude vorgehen würde, bevor etwas geändert wird.</td></tr>
+    <tr><td><b>Manual</b></td><td>Du willst jeden Schritt selbst absegnen, z. B. am Anfang zum Lernen.</td></tr>
+    <tr><td><b>Accept edits</b></td><td>Du vertraust den Dateiänderungen, willst aber bei Befehlen gefragt werden.</td></tr>
+    <tr><td><b>Auto</b></td><td>Standard in neueren Versionen. Ein Prüfer schaut im Hintergrund jede Aktion an und stoppt die riskanten.</td></tr>
+  </table></div>
+  <p>Für Befehle, denen du immer vertraust (z. B. <code>npm test</code>), kannst du eine feste Erlaubnis in den Einstellungen hinterlegen. Das vertiefen wir in <b>Kapitel 4</b>.</p>
+  <a class="source" href="https://code.claude.com/docs/de/permission-modes" target="_blank" rel="noopener">📖 Original: Berechtigungsmodi ↗</a>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="lesson" id="sitzungen" data-keywords="sitzung session fortsetzen resume continue fork branch verzweigen kontextfenster context compact komprimieren">
+  <div class="sec-head"><span class="sec-num">8</span><h2>Sitzungen und das Kontextfenster</h2></div>
+  <p class="lead">Ein Gespräch mit Claude heißt Sitzung. Jede Sitzung hat ein begrenztes „Arbeitsgedächtnis“: das Kontextfenster.</p>
+
+  <h3>Sitzungen</h3>
+  <ul>
+    <li>Claude speichert jedes Gespräch lokal auf deinem Rechner (im Ordner <code>~/.claude/projects/</code>).</li>
+    <li>Jede <b>neue</b> Sitzung beginnt frisch, ohne das alte Gespräch. Was dauerhaft gelten soll, gehört in die <code>CLAUDE.md</code>.</li>
+    <li>Eine Sitzung gehört zu dem Ordner, in dem du sie gestartet hast.</li>
+  </ul>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 720 200" role="img" aria-label="Fortsetzen und Verzweigen einer Sitzung">
+      <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8f897d"/></marker></defs>
+      <text x="20" y="22" class="svg-t">Fortsetzen</text>
+      <text x="20" y="40" class="svg-s">claude -c · claude -r · /resume</text>
+      <circle cx="60" cy="80" r="14" class="svg-accent"/><circle cx="130" cy="80" r="14" class="svg-accent"/><circle cx="200" cy="80" r="14" class="svg-accent"/>
+      <path d="M74 80 L114 80 M144 80 L184 80" class="svg-arrow"/>
+      <path d="M214 80 L262 80" class="svg-arrow" stroke-dasharray="5 4" marker-end="url(#ah2)"/>
+      <circle cx="280" cy="80" r="14" class="svg-green"/>
+      <text x="170" y="122" text-anchor="middle" class="svg-s">gleiche Sitzung, es geht einfach weiter</text>
+
+      <text x="390" y="22" class="svg-t">Verzweigen</text>
+      <text x="390" y="40" class="svg-s">/branch · --fork-session</text>
+      <circle cx="430" cy="80" r="14" class="svg-accent"/><circle cx="500" cy="80" r="14" class="svg-accent"/><circle cx="570" cy="80" r="14" class="svg-accent"/>
+      <path d="M444 80 L484 80 M514 80 L554 80" class="svg-arrow"/>
+      <path d="M512 90 Q540 150 590 150" class="svg-arrow" marker-end="url(#ah2)"/>
+      <circle cx="608" cy="150" r="14" class="svg-violet"/><circle cx="670" cy="150" r="14" class="svg-violet"/>
+      <path d="M622 150 L654 150" class="svg-arrow"/>
+      <text x="560" y="190" text-anchor="middle" class="svg-s">Kopie mit neuer ID, das Original bleibt unverändert</text>
+    </svg>
+  </figure>
+
+  <h3>Das Kontextfenster</h3>
+  <p>Alles, was Claude in einer Sitzung „im Kopf“ hat, liegt im Kontextfenster. Es ist groß, aber nicht unendlich.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 720 120" role="img" aria-label="Beispielhafte Belegung des Kontextfensters">
+      <rect x="20" y="20" width="680" height="44" rx="10" class="svg-box"/>
+      <rect x="20" y="20" width="70" height="44" rx="10" fill="#8f897d" opacity=".55"/>
+      <rect x="90" y="20" width="60" height="44" fill="#c96442" opacity=".7"/>
+      <rect x="150" y="20" width="50" height="44" fill="#6d4bb5" opacity=".6"/>
+      <rect x="200" y="20" width="200" height="44" fill="#2f6fb3" opacity=".55"/>
+      <rect x="400" y="20" width="150" height="44" fill="#2e7d4f" opacity=".55"/>
+      <text x="55" y="90" text-anchor="middle" class="svg-s">System</text>
+      <text x="120" y="90" text-anchor="middle" class="svg-s">CLAUDE.md</text>
+      <text x="175" y="106" text-anchor="middle" class="svg-s">Memory/Skills</text>
+      <text x="300" y="90" text-anchor="middle" class="svg-s">Gesprächsverlauf</text>
+      <text x="475" y="90" text-anchor="middle" class="svg-s">Dateien &amp; Ausgaben</text>
+      <text x="625" y="90" text-anchor="middle" class="svg-s">noch frei</text>
+    </svg>
+    <figcaption>Vereinfachtes Beispiel. Mit <code>/context</code> siehst du die echte Belegung.</figcaption>
+  </figure>
+  <ul>
+    <li>Wird es voll, fasst Claude das Gespräch automatisch zusammen (<b>Komprimieren</b>). Dabei können frühe Detail-Anweisungen verloren gehen.</li>
+    <li>Mit <code>/compact Fokus auf die API-Änderungen</code> steuerst du, was beim Zusammenfassen erhalten bleibt.</li>
+    <li>Für eine neue, andere Aufgabe lieber <code>/clear</code>: Ein frischer Kontext liefert bessere Ergebnisse.</li>
+  </ul>
+  <div class="box merke"><div class="box-title">📌 Merke</div>
+    <p>Regeln, die immer gelten sollen, gehören in die <code>CLAUDE.md</code>, nicht nur ins Gespräch. Das Gespräch kann beim Komprimieren gekürzt werden, die <code>CLAUDE.md</code> wird jedes Mal neu geladen.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/how-claude-code-works#mit-sitzungen-arbeiten" target="_blank" rel="noopener">📖 Original: Mit Sitzungen arbeiten ↗</a>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="lesson" id="lokal-cloud" data-keywords="lokal cloud remote control vm ausführungsumgebung pc laptop teleport --cloud wo läuft code">
+  <div class="sec-head"><span class="sec-num">9</span><h2>Lokal, Cloud oder Remote Control?</h2></div>
+  <p class="lead">Claude arbeitet überall gleich. Der Unterschied ist, <b>auf welchem Rechner</b> der Code läuft und wie du zuschaust.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 720 270" role="img" aria-label="Vergleich lokal, Cloud und Remote Control">
+      <defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c96442"/></marker></defs>
+      <!-- Lokal -->
+      <rect x="10" y="10" width="225" height="250" rx="16" class="svg-box"/>
+      <text x="122" y="40" text-anchor="middle" class="svg-t">💻 Lokal</text>
+      <rect x="40" y="65" width="165" height="80" rx="12" class="svg-blue"/>
+      <text x="122" y="95" text-anchor="middle" class="svg-t">Dein PC</text>
+      <text x="122" y="116" text-anchor="middle" class="svg-s">Claude + deine Dateien</text>
+      <text x="122" y="132" text-anchor="middle" class="svg-s">+ deine Tools</text>
+      <text x="122" y="180" text-anchor="middle" class="svg-s">Du sitzt davor.</text>
+      <text x="122" y="198" text-anchor="middle" class="svg-s">Standard beim Terminal,</text>
+      <text x="122" y="216" text-anchor="middle" class="svg-s">VS Code und Desktop.</text>
+      <!-- Cloud -->
+      <rect x="248" y="10" width="225" height="250" rx="16" class="svg-box"/>
+      <text x="360" y="40" text-anchor="middle" class="svg-t">☁️ Cloud</text>
+      <rect x="278" y="65" width="165" height="80" rx="12" class="svg-violet"/>
+      <text x="360" y="95" text-anchor="middle" class="svg-t">Server von Anthropic</text>
+      <text x="360" y="116" text-anchor="middle" class="svg-s">Claude + Kopie deines</text>
+      <text x="360" y="132" text-anchor="middle" class="svg-s">GitHub-Repos</text>
+      <rect x="318" y="190" width="85" height="45" rx="10" class="svg-blue"/>
+      <text x="360" y="218" text-anchor="middle" class="svg-s">📱 / 🌐 du</text>
+      <path d="M360 188 L360 150" class="svg-arrow-accent" marker-end="url(#ah3)"/>
+      <!-- Remote -->
+      <rect x="486" y="10" width="225" height="250" rx="16" class="svg-box"/>
+      <text x="598" y="40" text-anchor="middle" class="svg-t">📡 Remote Control</text>
+      <rect x="516" y="65" width="165" height="80" rx="12" class="svg-blue"/>
+      <text x="598" y="95" text-anchor="middle" class="svg-t">Dein PC</text>
+      <text x="598" y="116" text-anchor="middle" class="svg-s">Claude + deine Dateien</text>
+      <text x="598" y="132" text-anchor="middle" class="svg-s">bleiben lokal</text>
+      <rect x="556" y="190" width="85" height="45" rx="10" class="svg-accent"/>
+      <text x="598" y="218" text-anchor="middle" class="svg-s">📱 / 🌐 du</text>
+      <path d="M598 188 L598 150" class="svg-arrow-accent" marker-end="url(#ah3)"/>
+    </svg>
+  </figure>
+
+  <div class="table-wrap"><table>
+    <tr><th></th><th>💻 Lokal</th><th>☁️ Cloud</th><th>📡 Remote Control</th></tr>
+    <tr><td><b>Wo läuft der Code?</b></td><td>Auf deinem PC</td><td>Auf einem Server (VM) von Anthropic</td><td>Auf deinem PC</td></tr>
+    <tr><td><b>Wie bedienst du es?</b></td><td>Terminal, VS Code, Desktop-App</td><td>Browser, Handy, Desktop-App, <code>claude --cloud</code></td><td>Browser oder Handy-App</td></tr>
+    <tr><td><b>Zugriff auf</b></td><td>alle deine Dateien und Programme</td><td>GitHub-Repos und hochgeladene Dateien</td><td>alle deine Dateien und Programme</td></tr>
+    <tr><td><b>Läuft weiter, wenn der Laptop zu ist?</b></td><td>❌ Nein</td><td>✅ Ja</td><td>❌ Nein, der PC muss an sein</td></tr>
+    <tr><td><b>Gut für</b></td><td>tägliche Arbeit am eigenen Projekt</td><td>lange Aufgaben, mehrere parallel, Repos ohne lokale Kopie</td><td>vom Sofa oder unterwegs an der laufenden PC-Sitzung weitermachen</td></tr>
+  </table></div>
+
+  <h3>Zwischen den Welten wechseln</h3>
+  <div class="grid c2">
+    <div class="card"><h4>💻 → ☁️ <code>claude --cloud</code></h4><p>Startet eine Aufgabe aus dem Terminal direkt in der Cloud. Danach kannst du sie auf dem Handy weiterverfolgen.</p></div>
+    <div class="card"><h4>☁️ → 💻 <code>claude --teleport</code></h4><p>Holt eine Cloud-Sitzung zurück in dein Terminal.</p></div>
+    <div class="card"><h4>💻 → 📱 <code>/remote-control</code></h4><p>Macht deine laufende Sitzung im Browser und auf dem Handy erreichbar.</p></div>
+    <div class="card"><h4>⌨️ → 🖼️ <code>/desktop</code></h4><p>Übergibt die Terminal-Sitzung an die Desktop-App, wo du Änderungen visuell prüfst.</p></div>
+  </div>
+
+  <div class="box info"><div class="box-title">ℹ️ Gut zu wissen</div>
+    <ul>
+      <li>Cloud-Sitzungen brauchen einen Plan wie Pro, Max, Ultra oder Team und eine Verbindung zu GitHub.</li>
+      <li>Sie zählen zu den normalen Nutzungslimits deines Plans. Für den Cloud-Server zahlst du nichts extra.</li>
+      <li>In der Cloud hat Claude <b>nicht</b> deine lokale Einrichtung (lokale Skills, Einstellungen). Die <code>CLAUDE.md</code> im Repo liest es aber schon.</li>
+    </ul>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/claude-code-on-the-web" target="_blank" rel="noopener">📖 Original: Claude Code in der Cloud ↗</a>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="lesson" id="plattformen" data-keywords="plattformen oberflächen cli terminal desktop app vs code jetbrains web mobile handy ios android chrome slack github actions">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Die Oberflächen: wo du Claude Code benutzt</h2></div>
+  <p class="lead">Überall steckt dieselbe „Maschine“ dahinter. Deine <code>CLAUDE.md</code>, Einstellungen und MCP-Server gelten auf allen lokalen Oberflächen.</p>
+
+  <div class="grid c3">
+    <div class="card"><div class="emoji">⌨️</div><h4>Terminal (CLI)</h4><p>Der volle Funktionsumfang. Nur hier: Skripte mit <code>claude -p</code> und das Agent SDK.</p><span class="tag">für Terminal-Fans &amp; Server</span></div>
+    <div class="card"><div class="emoji">🖼️</div><h4>Desktop-App</h4><p>Grafische Oberfläche mit Diff-Ansicht, mehreren Sitzungen nebeneinander, App-Vorschau und geplanten Aufgaben.</p><span class="tag">ohne Terminal</span></div>
+    <div class="card"><div class="emoji">🧩</div><h4>VS Code / Cursor</h4><p>Als Erweiterung direkt im Editor, mit Änderungen inline und @-Erwähnungen von Dateien.</p><span class="tag">im Editor</span></div>
+    <div class="card"><div class="emoji">🧠</div><h4>JetBrains</h4><p>Plugin für IntelliJ, PyCharm, WebStorm &amp; Co. Braucht zusätzlich die CLI.</p><span class="tag">im Editor</span></div>
+    <div class="card"><div class="emoji">🌐</div><h4>Web</h4><p>Unter <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>, läuft in der Cloud, nichts zu installieren.</p><span class="tag">Cloud</span></div>
+    <div class="card"><div class="emoji">📱</div><h4>Handy-App</h4><p>Claude-App für iOS und Android: Cloud-Aufgaben starten und verfolgen, lokale Sitzungen per Remote Control steuern.</p><span class="tag">unterwegs</span></div>
+  </div>
+
+  <h3>Welche Oberfläche passt zu mir?</h3>
+  <details class="acc"><summary>Ich arbeite gern im Terminal oder will Abläufe automatisieren</summary><div class="acc-body"><p>➡ <b>CLI</b>. Am vollständigsten und für Skripte die einzige Wahl.</p></div></details>
+  <details class="acc"><summary>Ich will kein Terminal und lieber Änderungen visuell prüfen</summary><div class="acc-body"><p>➡ <b>Desktop-App</b>, Tab <b>Code</b>. Enthält Claude Code schon, keine Extra-Installation nötig (bezahltes Abo erforderlich).</p></div></details>
+  <details class="acc"><summary>Ich programmiere sowieso in VS Code</summary><div class="acc-body"><p>➡ <b>VS-Code-Erweiterung</b>. In der Erweiterungsansicht nach „Claude Code“ suchen.</p></div></details>
+  <details class="acc"><summary>Ich will eine lange Aufgabe starten und den Laptop zuklappen</summary><div class="acc-body"><p>➡ <b>Web</b> oder <b>Handy</b> (Cloud-Sitzung). Läuft weiter, auch wenn du offline bist.</p></div></details>
+
+  <h3>Integrationen</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Integration</th><th>Wofür</th></tr>
+    <tr><td>🌍 Chrome</td><td>Claude steuert deinen Browser, z. B. um eine Web-App zu testen</td></tr>
+    <tr><td>🐙 GitHub Actions / GitLab CI</td><td>Claude läuft automatisch in deiner CI, z. B. für Reviews</td></tr>
+    <tr><td>🔍 Code Review</td><td>Prüft jeden Pull Request automatisch</td></tr>
+    <tr><td>💬 Slack</td><td><code>@Claude</code> im Kanal erwähnen, Pull Request zurückbekommen</td></tr>
+    <tr><td>🔌 MCP &amp; Konnektoren</td><td>Fast alles andere: Notion, Linear, Google Drive, eigene APIs</td></tr>
+  </table></div>
+  <a class="source" href="https://code.claude.com/docs/de/platforms" target="_blank" rel="noopener">📖 Original: Plattformen und Integrationen ↗</a>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="lesson" id="unterwegs" data-keywords="unterwegs dispatch remote control channels telegram discord slack geplante aufgaben schedule loop routinen">
+  <div class="sec-head"><span class="sec-num">11</span><h2>Arbeiten, wenn du nicht am PC sitzt</h2></div>
+  <p class="lead">Es gibt mehrere Wege, Claude arbeiten zu lassen, während du weg bist. Sie unterscheiden sich darin, was sie auslöst und wo Claude läuft.</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>Weg</th><th>Auslöser</th><th>Claude läuft auf</th><th>Ideal für</th></tr>
+    <tr><td>📨 <b>Dispatch</b></td><td>Aufgabe aus der Handy-App senden</td><td>deinem PC (Desktop-App)</td><td>schnell etwas delegieren</td></tr>
+    <tr><td>📡 <b>Remote Control</b></td><td>laufende Sitzung vom Handy/Browser steuern</td><td>deinem PC</td><td>Arbeit am PC von unterwegs weiterführen</td></tr>
+    <tr><td>📣 <b>Channels</b></td><td>Nachricht aus Telegram, Discord o. ä.</td><td>deinem PC</td><td>auf Ereignisse reagieren</td></tr>
+    <tr><td>💬 <b>Slack</b></td><td><code>@Claude</code> im Kanal</td><td>Cloud</td><td>Fehlerberichte aus dem Team-Chat</td></tr>
+    <tr><td>⏰ <b>Geplante Aufgaben</b></td><td>Zeitplan</td><td>CLI, Desktop oder Cloud</td><td>z. B. tägliche Reviews</td></tr>
+  </table></div>
+
+  <div class="box tipp"><div class="box-title">💡 Tipp</div>
+    <p>Geplante Aufgaben in der <b>Cloud</b> laufen auch bei ausgeschaltetem PC. Die in der <b>Desktop-App</b> laufen auf deinem Rechner und kommen dafür an deine lokalen Dateien. Mehr dazu in <b>Kapitel 7</b>.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/platforms#arbeiten-sie-wenn-sie-weg-von-ihrem-terminal-sind" target="_blank" rel="noopener">📖 Original: Arbeiten ohne Terminal ↗</a>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="lesson" id="projekte-mods" data-keywords="projekte projects threads koordinator overview mods plugin skills hooks mcp subagenten erweitern">
+  <div class="sec-head"><span class="sec-num">12</span><h2>Projekte, Mods &amp; Erweiterungen im Überblick</h2></div>
+  <p class="lead">Ein erster Blick auf Funktionen, die über eine einzelne Sitzung hinausgehen. Jede bekommt später ihr eigenes Kapitel.</p>
+
+  <h3>🗂️ Projekte</h3>
+  <p>Ein <b>Projekt</b> ist ein langes Gespräch, in dem Claude als <b>Koordinator</b> arbeitet. Du wirfst Aufgaben hinein, und Claude startet für jede einen eigenen <b>Thread</b>: eine eigene Cloud-Sitzung, die parallel arbeitet und danach Bericht erstattet.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 720 230" role="img" aria-label="Aufbau eines Projekts">
+      <defs><marker id="ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8f897d"/></marker></defs>
+      <rect x="10" y="85" width="110" height="60" rx="12" class="svg-blue"/><text x="65" y="112" text-anchor="middle" class="svg-t">🧑 Du</text><text x="65" y="130" text-anchor="middle" class="svg-s">Aufgaben</text>
+      <path d="M120 115 L170 115" class="svg-arrow" marker-end="url(#ah4)"/>
+      <rect x="172" y="70" width="180" height="90" rx="14" class="svg-accent"/><text x="262" y="105" text-anchor="middle" class="svg-t">🎯 Koordinator</text><text x="262" y="125" text-anchor="middle" class="svg-s">verteilt Arbeit,</text><text x="262" y="141" text-anchor="middle" class="svg-s">behält den Überblick</text>
+      <path d="M352 100 L410 40" class="svg-arrow" marker-end="url(#ah4)"/>
+      <path d="M352 115 L410 115" class="svg-arrow" marker-end="url(#ah4)"/>
+      <path d="M352 130 L410 190" class="svg-arrow" marker-end="url(#ah4)"/>
+      <rect x="412" y="12" width="150" height="54" rx="10" class="svg-violet"/><text x="487" y="36" text-anchor="middle" class="svg-t">Thread A</text><text x="487" y="54" text-anchor="middle" class="svg-s">eigener Branch + PR</text>
+      <rect x="412" y="88" width="150" height="54" rx="10" class="svg-violet"/><text x="487" y="112" text-anchor="middle" class="svg-t">Thread B</text><text x="487" y="130" text-anchor="middle" class="svg-s">eigener Branch + PR</text>
+      <rect x="412" y="164" width="150" height="54" rx="10" class="svg-violet"/><text x="487" y="188" text-anchor="middle" class="svg-t">Thread C</text><text x="487" y="206" text-anchor="middle" class="svg-s">z. B. auf deinem PC</text>
+      <rect x="590" y="70" width="120" height="90" rx="14" class="svg-green"/><text x="650" y="105" text-anchor="middle" class="svg-t">📋 Übersicht</text><text x="650" y="125" text-anchor="middle" class="svg-s">fertig · wartet</text><text x="650" y="141" text-anchor="middle" class="svg-s">auf dich · läuft</text>
+      <path d="M562 39 L600 80 M562 115 L588 115 M562 191 L600 150" class="svg-arrow" stroke-dasharray="4 4"/>
+    </svg>
+  </figure>
+  <ul>
+    <li><b>Kontext einmal festlegen:</b> Anweisungen und Gedächtnis des Projekts gelten für jeden neuen Thread.</li>
+    <li><b>Weggehen und zurückkommen:</b> In der Übersicht siehst du, was fertig ist und was auf deine Antwort wartet.</li>
+    <li><b>Nicht nur Code:</b> Du kannst auch Dokumente hochladen und dazu Fragen stellen.</li>
+    <li>Projekte sind im Moment eine <b>Beta</b> für Pro, Max und Ultra und kommen nach und nach bei allen an.</li>
+  </ul>
+  <div class="box beispiel"><div class="box-title">🧭 Beispiel</div>
+    <p>Genau so entsteht dieses Lernwiki: In einem Projekt „CC_Learning“ bekommt jedes Kapitel seinen eigenen Thread.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/claude-projects" target="_blank" rel="noopener">📖 Original: Projekte ↗</a>
+
+  <h3>🎨 Mods</h3>
+  <p>Ein <b>Mod</b> verändert, wie Claude Code selbst aussieht und sich verhält. Er ist ein kleines Plugin in JavaScript oder TypeScript, das <b>innerhalb</b> von Claude Code läuft. Damit kann er zum Beispiel:</p>
+  <ul>
+    <li>eigene Bereiche mit Knöpfen und Feldern in die Oberfläche zeichnen (etwa eine Anzeige, wie voll der Kontext ist),</li>
+    <li>einen riskanten Befehl wie <code>rm -rf</code> anhalten und nachfragen,</li>
+    <li>eigene <code>/befehle</code> hinzufügen, die sofort laufen.</li>
+  </ul>
+  <p>Du musst Mods nicht selbst programmieren: Beschreib Claude, was du willst, und es schreibt den Mod für dich. Mods laufen in der CLI, der Desktop-App und VS Code.</p>
+  <div class="box achtung"><div class="box-title">⚠️ Achtung</div>
+    <p>Ein Mod läuft mit deinen Rechten: Er kann deine Dateien lesen, Programme starten und deine Sitzung sehen. Installiere nur Mods von Quellen, denen du vertraust.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/plugins/mods/overview" target="_blank" rel="noopener">📖 Original: Mods ↗</a>
+
+  <h3>🧩 Die Erweiterungs-Familie auf einen Blick</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Baustein</th><th>Kurz gesagt</th><th>Kapitel</th></tr>
+    <tr><td><code>CLAUDE.md</code></td><td>Dauerhafte Hinweise zu deinem Projekt</td><td>3</td></tr>
+    <tr><td>Skills</td><td>Wiederverwendbare Abläufe, z. B. <code>/review-pr</code></td><td>5</td></tr>
+    <tr><td>Hooks</td><td>Befehle, die automatisch vor oder nach Aktionen laufen</td><td>5</td></tr>
+    <tr><td>MCP</td><td>Anbindung an externe Dienste und Daten</td><td>5</td></tr>
+    <tr><td>Plugins &amp; Mods</td><td>Pakete aus Skills, Hooks usw. bzw. Umbau der Oberfläche</td><td>5</td></tr>
+    <tr><td>Subagenten</td><td>Helfer mit eigenem Kontext für Teilaufgaben</td><td>6</td></tr>
+  </table></div>
+</section>
+
+<!-- ============ 13 ============ -->
+<section class="lesson" id="tipps" data-keywords="tipps anfänger prompt konkret schritt für schritt erkunden delegieren korrigieren">
+  <div class="sec-head"><span class="sec-num">13</span><h2>Tipps für den Start</h2></div>
+  <p class="lead">Fünf Gewohnheiten, die von Anfang an bessere Ergebnisse bringen.</p>
+
+  <h3>1. Sei konkret</h3>
+  <div class="compare">
+    <div class="bad"><b>❌ Unklar</b>„Behebe den Fehler.“</div>
+    <div class="good"><b>✅ Konkret</b>„Behebe den Login-Fehler: Nach einem falschen Passwort sehen Nutzer eine leere Seite.“</div>
+  </div>
+
+  <h3>2. Große Aufgaben in Schritte teilen</h3>
+  <div class="code"><span class="label">Prompt</span><pre>1. Leg eine Datenbanktabelle für Benutzerprofile an.
+2. Bau eine Schnittstelle, um Profile zu lesen und zu ändern.
+3. Erstell eine Seite, auf der Nutzer ihr Profil bearbeiten können.</pre></div>
+
+  <h3>3. Erst erkunden lassen, dann ändern</h3>
+  <p>„Analysiere zuerst das Datenbankschema und erklär es mir“ ist ein guter Start, bevor du etwas umbauen lässt. Der <b>Plan-Modus</b> ist genau dafür da.</p>
+
+  <h3>4. Delegieren statt diktieren</h3>
+  <p>Gib Ziel und Hintergrund, nicht jeden Handgriff. Welche Dateien es lesen muss, findet Claude selbst heraus.</p>
+  <div class="code"><span class="label">Prompt</span><pre>Der Bezahlvorgang klappt nicht bei abgelaufenen Karten.
+Der Code liegt in src/payments/. Kannst du das untersuchen und beheben?</pre></div>
+
+  <h3>5. Im Gespräch korrigieren</h3>
+  <p>Der erste Versuch ist nicht perfekt? Kein Neustart nötig, sag einfach: „Nicht ganz, das Problem liegt in der Sitzungsverwaltung.“ Wenn Claude nach zwei Korrekturen immer noch danebenliegt, ist ein frischer Start mit <code>/clear</code> und einem besseren Prompt meist schneller.</p>
+
+  <div class="box tipp"><div class="box-title">💡 Claude kann dir Claude Code erklären</div>
+    <p>Frag direkt in der Sitzung: „Wie richte ich Hooks ein?“ oder „Wie sollte ich meine CLAUDE.md aufbauen?“. Und <code>/doctor</code> findet Probleme in deiner Einrichtung.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/best-practices" target="_blank" rel="noopener">📖 Original: Best Practices ↗</a>
+</section>
+
+<!-- ============ 14 ============ -->
+<section class="lesson" id="faq" data-keywords="fragen faq kosten kostenlos abo deutsch offline daten sicher">
+  <div class="sec-head"><span class="sec-num">?</span><h2>Häufige Fragen</h2></div>
+  <details class="acc"><summary>Kostet Claude Code etwas?</summary><div class="acc-body"><p>Ja. Du brauchst ein Claude-Abo (Pro, Max, Ultra, Team oder Enterprise) oder ein Console-Konto, bei dem du pro Nutzung zahlst. Die Nutzung zählt zu den Limits deines Plans, auch Cloud-Sitzungen.</p></div></details>
+  <details class="acc"><summary>Kann ich auf Deutsch mit Claude reden?</summary><div class="acc-body"><p>Ja, ganz normal. Claude antwortet dann auch auf Deutsch.</p></div></details>
+  <details class="acc"><summary>Brauche ich Programmierkenntnisse?</summary><div class="acc-body"><p>Für den Einstieg nicht unbedingt. Du solltest aber verstehen, was Claude ändert, bevor du es übernimmst. Der Plan-Modus und das Nachfragen („Erklär mir, was du geändert hast“) helfen dabei.</p></div></details>
+  <details class="acc"><summary>Kann Claude etwas kaputt machen?</summary><div class="acc-body"><p>Dateiänderungen kannst du mit <kbd>Esc</kbd> <kbd>Esc</kbd> zurückspulen. Bei Aktionen nach außen (Datenbanken, Deployments) schützen dich die Berechtigungsmodi. Nutze außerdem git, dann ist jeder Stand sicher.</p></div></details>
+  <details class="acc"><summary>Wo ist der Unterschied zwischen Claude im Chat und Claude Code?</summary><div class="acc-body"><p>Der Chat auf claude.ai beantwortet Fragen. Claude Code arbeitet direkt in deinem Projekt: Es liest und ändert Dateien und führt Befehle aus.</p></div></details>
+  <details class="acc"><summary>Was ist der Unterschied zwischen Desktop-App und Terminal?</summary><div class="acc-body"><p>Dieselbe Maschine, andere Bedienung. Das Terminal kann am meisten (z. B. Skripte), die Desktop-App ist grafisch und zeigt Änderungen übersichtlich an.</p></div></details>
+</section>
+
+<!-- ============ Quiz ============ -->
+<section class="lesson" id="quiz-sec" data-noread data-keywords="quiz test fragen prüfen">
+  <div class="sec-head"><span class="sec-num">🎯</span><h2>Quiz: Was hast du behalten?</h2></div>
+  <p class="lead">12 Fragen. Nach jeder Antwort siehst du die Erklärung.</p>
+  <div class="quiz" id="quiz"></div>
+</section>
+
+<!-- ============ Merkkarten ============ -->
+<section class="lesson" id="karten" data-noread data-keywords="merkkarten karteikarten lernkarten flashcards wiederholen">
+  <div class="sec-head"><span class="sec-num">🃏</span><h2>Merkkarten</h2></div>
+  <p class="lead">Begriff ansehen, kurz überlegen, Karte umdrehen. Pfeiltasten blättern, Leertaste dreht um.</p>
+  <div class="fc-wrap" id="flashcards"></div>
+</section>
+
+<nav class="chapter-nav">
+  <a href="index.html"><small>← Zurück</small>Startseite</a>
+  <a class="next disabled"><small>Weiter →</small>Kapitel 2 · Richtig arbeiten (bald)</a>
+</nav>
+
+</div>
+</main>
+</div>
+
+<footer>
+  Inhalte in eigenen Worten zusammengefasst nach der offiziellen <a href="https://code.claude.com/docs/de/overview" target="_blank" rel="noopener">Claude-Code-Dokumentation</a>. Stand: November 2026. Im Zweifel gilt das Original.
+</footer>
+
+<!-- ===================== Quizfragen ===================== -->
+<script type="application/json" id="quiz-data">
+[
+  {"q":"Was unterscheidet Claude Code von einem normalen Chatbot?","a":["Es antwortet schneller","Es handelt selbst: liest Dateien, ändert Code, führt Befehle aus","Es funktioniert ohne Internet","Es kann nur Python"],"c":1,"why":"Claude Code ist ein Agent. Es erledigt die Schritte selbst, statt nur Text zu liefern.","link":"was-ist"},
+  {"q":"Welche drei Phasen hat die Arbeitsschleife?","a":["Planen, Programmieren, Veröffentlichen","Lesen, Schreiben, Speichern","Kontext sammeln, Handeln, Prüfen","Fragen, Warten, Antworten"],"c":2,"why":"Kontext sammeln, Handeln, Ergebnis prüfen, und das so oft, bis die Aufgabe erledigt ist.","link":"schleife"},
+  {"q":"Mit welcher Taste stoppst du Claude sofort?","a":["<kbd>Esc</kbd>","<kbd>Ctrl</kbd>+<kbd>C</kbd> dreimal","<kbd>F5</kbd>","<kbd>Shift</kbd>+<kbd>Tab</kbd>"],"c":0,"why":"<kbd>Esc</kbd> bricht den laufenden Schritt ab. Claude wartet dann auf deine nächste Anweisung.","link":"schleife"},
+  {"q":"Wie prüfst du nach der Installation, ob alles geklappt hat?","a":["<code>claude --check</code>","<code>claude --version</code> in einem neuen Terminal","Den PC neu starten","<code>/doctor</code> im Browser"],"c":1,"why":"Erscheint eine Versionsnummer mit „(Claude Code)“, ist die Installation in Ordnung.","link":"installation"},
+  {"q":"Unter Windows erscheint „claude wird nicht erkannt“. Was ist die wahrscheinlichste Ursache?","a":["Kein Internet","Der Installationsordner ist noch nicht im PATH","Falsches Passwort","Windows wird nicht unterstützt"],"c":1,"why":"Erst ein neues Terminal öffnen. Hilft das nicht, den PATH reparieren.","link":"installation"},
+  {"q":"Was macht <code>claude -c</code>?","a":["Löscht den Verlauf","Startet in der Cloud","Setzt das letzte Gespräch in diesem Ordner fort","Kompiliert das Projekt"],"c":2,"why":"<code>-c</code> steht für continue (fortsetzen). <code>-r</code> zeigt eine Auswahl früherer Gespräche.","link":"befehle"},
+  {"q":"Was passiert, wenn du zweimal <kbd>Esc</kbd> drückst?","a":["Claude Code wird beendet","Du kannst zu einem früheren Stand zurückspulen","Der Modus wechselt","Das Modell wechselt"],"c":1,"why":"Das sind die Checkpoints: Vor jeder Dateiänderung merkt sich Claude den alten Inhalt.","link":"sicherheit"},
+  {"q":"Was können Checkpoints NICHT rückgängig machen?","a":["Geänderte Dateien","Neu angelegte Dateien","Eine Änderung an einer externen Datenbank","Gelöschten Code in einer Datei"],"c":2,"why":"Checkpoints decken nur Dateien ab. Aktionen nach außen kontrollierst du über die Berechtigungen.","link":"sicherheit"},
+  {"q":"In welchem Modus ändert Claude gar nichts, sondern schlägt nur einen Plan vor?","a":["Auto","Accept edits","Manual","Plan"],"c":3,"why":"Im Plan-Modus erkundet Claude und schlägt ein Vorgehen vor, ohne deine Dateien zu bearbeiten.","link":"sicherheit"},
+  {"q":"Warum gehören dauerhafte Regeln in die <code>CLAUDE.md</code> statt nur ins Gespräch?","a":["Weil das Gespräch beim Komprimieren gekürzt werden kann","Weil Claude kein Deutsch versteht","Weil das Gespräch nicht gespeichert wird","Weil die CLAUDE.md schneller ist"],"c":0,"why":"Die <code>CLAUDE.md</code> wird bei jedem Start neu geladen. Frühe Anweisungen im Gespräch können beim Zusammenfassen verloren gehen.","link":"sitzungen"},
+  {"q":"Du willst eine lange Aufgabe starten und den Laptop zuklappen. Was passt?","a":["Lokale Sitzung im Terminal","Remote Control","Eine Cloud-Sitzung (Web, Handy oder <code>claude --cloud</code>)","VS-Code-Erweiterung"],"c":2,"why":"Nur Cloud-Sitzungen laufen auf Servern von Anthropic weiter. Bei Remote Control muss dein PC an bleiben.","link":"lokal-cloud"},
+  {"q":"Was ist ein Projekt in Claude Code?","a":["Ein anderes Wort für einen Ordner","Ein Gespräch, in dem Claude als Koordinator viele parallele Threads startet und verfolgt","Eine Datei namens project.json","Ein Abo-Modell"],"c":1,"why":"Im Projekt verteilt ein Koordinator die Aufgaben auf Threads. Gemeinsame Anweisungen und Gedächtnis gelten für alle.","link":"projekte-mods"}
+]
+</script>
+
+<!-- ===================== Merkkarten ===================== -->
+<script type="application/json" id="cards-data">
+[
+  {"f":"Agent","b":"Eine KI, die nicht nur antwortet, sondern selbst Schritte ausführt: Dateien lesen, Code ändern, Befehle starten, Ergebnis prüfen."},
+  {"f":"Arbeitsschleife (agentic loop)","b":"Kontext sammeln → Handeln → Prüfen, wiederholt, bis die Aufgabe erledigt ist. Du kannst jederzeit eingreifen."},
+  {"f":"Harness","b":"Claude Code selbst: die Schicht um das Modell, die Tools bereitstellt und den Kontext verwaltet."},
+  {"f":"Sonnet vs. Opus","b":"Sonnet: gut für die meisten Aufgaben. Opus: gründlicheres Denken für komplexe Entscheidungen. Wechseln mit <code>/model</code>."},
+  {"f":"<code>CLAUDE.md</code>","b":"Textdatei im Projekt mit dauerhaften Regeln und Hinweisen. Claude liest sie bei jedem Start."},
+  {"f":"Auto-Memory","b":"Notizen, die Claude sich während der Arbeit selbst macht (z. B. deine Vorlieben) und in späteren Sitzungen wieder lädt."},
+  {"f":"Kontextfenster","b":"Claudes Arbeitsgedächtnis in einer Sitzung: Gespräch, Dateien, Ausgaben, CLAUDE.md. Belegung zeigt <code>/context</code>."},
+  {"f":"Komprimieren","b":"Wenn der Kontext voll wird, fasst Claude das Gespräch zusammen. Steuern mit <code>/compact &lt;Fokus&gt;</code>."},
+  {"f":"Checkpoint","b":"Automatischer Schnappschuss vor jeder Dateiänderung. Zurückspulen mit <kbd>Esc</kbd> <kbd>Esc</kbd>. Gilt nur für Dateien."},
+  {"f":"<kbd>Shift</kbd>+<kbd>Tab</kbd>","b":"Wechselt den Berechtigungsmodus: Plan, Manual, Accept edits, Auto."},
+  {"f":"<code>claude -p</code>","b":"Einmalige Abfrage ohne interaktive Sitzung. Ideal für Skripte und Automatisierung."},
+  {"f":"<code>claude -c</code> / <code>-r</code>","b":"<code>-c</code>: letztes Gespräch im Ordner fortsetzen. <code>-r</code>: früheres Gespräch auswählen."},
+  {"f":"Cloud-Sitzung","b":"Claude läuft auf einem Server von Anthropic mit einer Kopie deines GitHub-Repos. Läuft weiter, wenn dein Laptop zu ist."},
+  {"f":"Remote Control","b":"Deine lokale Sitzung vom Handy oder Browser aus steuern. Code und Dateien bleiben auf deinem PC."},
+  {"f":"Projekt","b":"Ein Gespräch, in dem Claude als Koordinator Aufgaben auf parallele Threads verteilt und den Überblick behält."},
+  {"f":"Mod","b":"Ein Plugin, das innerhalb von Claude Code läuft und Oberfläche oder Verhalten ändert, z. B. eigene Bereiche oder Befehle."}
+]
+</script>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

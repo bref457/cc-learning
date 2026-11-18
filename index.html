@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code Lernwiki</title>
+<meta name="description" content="Claude Code Schritt für Schritt lernen, auf Deutsch, mit Diagrammen, Quiz und Merkkarten.">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=JSON.parse(localStorage.getItem("ccwiki:theme"));if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body data-page="start">
+
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="logo">✳</span><span class="txt">Claude Code Lernwiki</span></a>
+  <div class="search-wrap">
+    <span class="icon">🔍</span>
+    <input id="search" type="search" placeholder="Alle Kapitel durchsuchen … (Taste /)" autocomplete="off" aria-label="Suchen">
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <button class="icon-btn" id="theme-toggle" aria-label="Hell/Dunkel umschalten">🌙</button>
+</header>
+
+<main>
+<div class="content" style="max-width:1040px">
+
+  <div class="hero">
+    <div class="kicker">Lernwiki auf Deutsch</div>
+    <h1>Claude Code verstehen, Schritt für Schritt</h1>
+    <p>Die offizielle Dokumentation ist zum Nachschlagen gemacht. Dieses Wiki ist zum Lernen gemacht: in einer sinnvollen Reihenfolge, in eigenen Worten, mit Diagrammen, Quiz und Merkkarten. Jeder Abschnitt verlinkt auf das Original.</p>
+    <div class="meta">
+      <span class="chip">🇩🇪 Deutsch</span>
+      <span class="chip">🧭 9 Kapitel</span>
+      <span class="chip">🎯 Ohne Firmen- und Admin-Themen</span>
+      <span class="chip">💾 Fortschritt wird im Browser gespeichert</span>
+    </div>
+  </div>
+
+  <h2>Kapitel</h2>
+  <div class="chapters">
+    <a class="chapter-card" href="kapitel-1.html">
+      <span class="status ready" data-progress-of="kapitel-1">Bereit</span>
+      <div class="big">🚀</div><div class="n">Kapitel 1</div><h3>Grundlagen</h3>
+      <p>Was Claude Code ist, Installation, erste Sitzung, Arbeitsschleife, lokal vs. Cloud, Oberflächen, Projekte &amp; Mods.</p>
+    </a>
+    <div class="chapter-card soon"><span class="status">bald</span><div class="big">🎯</div><div class="n">Kapitel 2</div><h3>Richtig arbeiten</h3><p>Gute Prompts, typische Abläufe, Best Practices, Sitzungen steuern.</p></div>
+    <div class="chapter-card soon"><span class="status">bald</span><div class="big">🧠</div><div class="n">Kapitel 3</div><h3>Gedächtnis &amp; Kontext</h3><p>CLAUDE.md, Auto-Memory, Kontextfenster, Kosten im Griff.</p></div>
+    <div class="chapter-card soon"><span class="status">bald</span><div class="big">🛡️</div><div class="n">Kapitel 4</div><h3>Sicherheit &amp; Berechtigungen</h3><p>Modi, Regeln, Sandbox, was Claude darf und was nicht.</p></div>
+    <div class="chapter-card soon"><span class="status">bald</span><div class="big">🧩</div><div class="n">Kapitel 5</div><h3>Erweitern</h3><p>Skills, Hooks, MCP, Plugins und Mods.</p></div>
+    <div class="chapter-card soon"><span class="status">bald</span><div class="big">🤝</div><div class="n">Kapitel 6</div><h3>Agenten</h3><p>Subagenten, parallele Arbeit, Worktrees, Projekte.</p></div>
+    <div class="chapter-card soon"><span class="status">bald</span><div class="big">⏰</div><div class="n">Kapitel 7</div><h3>Automatisieren</h3><p>Geplante Aufgaben, Skripte mit <code>claude -p</code>, GitHub.</p></div>
+    <div class="chapter-card soon"><span class="status">bald</span><div class="big">🖥️</div><div class="n">Kapitel 8</div><h3>Oberflächen</h3><p>VS Code, Desktop-App, Web, Handy, Chrome.</p></div>
+    <div class="chapter-card soon"><span class="status">bald</span><div class="big">📚</div><div class="n">Kapitel 9</div><h3>Nachschlagen</h3><p>Befehle, Tastenkürzel, Einstellungen, Fehlerhilfe.</p></div>
+  </div>
+
+  <h2>So benutzt du das Wiki</h2>
+  <div class="grid c3">
+    <div class="card"><div class="emoji">🔍</div><h4>Suchen</h4><p>Oben ins Suchfeld tippen oder <kbd>/</kbd> drücken. Die Suche durchsucht alle Kapitel.</p></div>
+    <div class="card"><div class="emoji">✅</div><h4>Fortschritt</h4><p>Abschnitte werden als gelesen markiert, wenn du bis zum Ende scrollst. Grüne Punkte in der Seitenleiste.</p></div>
+    <div class="card"><div class="emoji">🎯</div><h4>Quiz &amp; Merkkarten</h4><p>Am Ende jedes Kapitels. Ideal zum Wiederholen.</p></div>
+    <div class="card"><div class="emoji">📦</div><h4>Farbige Boxen</h4><p><b style="color:var(--accent)">Merke</b>, <b style="color:var(--green)">Tipp</b>, <b style="color:var(--yellow)">Achtung</b>, <b style="color:var(--blue)">Info</b>, <b style="color:var(--violet)">Beispiel</b>.</p></div>
+    <div class="card"><div class="emoji">📖</div><h4>Zum Original</h4><p>Jeder Abschnitt hat einen Link zur passenden Seite der offiziellen Doku.</p></div>
+    <div class="card"><div class="emoji">🌙</div><h4>Dunkelmodus</h4><p>Oben rechts umschalten. Die Wahl wird gemerkt.</p></div>
+  </div>
+
+  <div class="box info"><div class="box-title">ℹ️ Fragen stellen</div>
+    <p>Die beste „Fragefunktion“ ist Claude Code selbst: Starte <code>claude</code> und frag zum Beispiel „Wie richte ich einen Hook ein?“. Claude kennt seine eigene Dokumentation.</p>
+  </div>
+</div>
+</main>
+
+<footer>
+  Inhalte in eigenen Worten nach der offiziellen <a href="https://code.claude.com/docs/de/overview" target="_blank" rel="noopener">Claude-Code-Dokumentation</a> · Inhaltsverzeichnis: <a href="https://code.claude.com/docs/llms.txt" target="_blank" rel="noopener">llms.txt</a>
+</footer>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
