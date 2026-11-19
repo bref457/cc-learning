@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kapitel 2 · Richtig arbeiten – Claude Code Lernwiki</title>
+<meta name="description" content="Gute Prompts, der Ablauf Erkunden, Planen, Umsetzen, Prüfen, Sitzungen steuern, Effort wählen und typische Fehler vermeiden.">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=JSON.parse(localStorage.getItem("ccwiki:theme"));if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body data-page="kapitel-2">
+
+<!-- ===================== Kopfzeile ===================== -->
+<header class="topbar">
+  <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menü">☰</button>
+  <a class="brand" href="index.html"><span class="logo">✳</span><span class="txt">Claude Code Lernwiki</span></a>
+  <div class="search-wrap">
+    <span class="icon">🔍</span>
+    <input id="search" type="search" placeholder="Suchen … (Taste /)" autocomplete="off" aria-label="Suchen">
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <button class="icon-btn" id="theme-toggle" aria-label="Hell/Dunkel umschalten">🌙</button>
+</header>
+
+<div class="layout">
+<!-- ===================== Seitenleiste ===================== -->
+<nav class="sidebar">
+  <h4>Kapitel</h4>
+  <a href="index.html">🏠 Startseite</a>
+  <a href="kapitel-1.html">1 · Grundlagen</a>
+  <a href="kapitel-2.html" class="current">2 · Richtig arbeiten</a>
+  <a class="disabled">3 · Gedächtnis &amp; Kontext</a>
+  <a class="disabled">4 · Sicherheit</a>
+  <a class="disabled">5 · Erweitern</a>
+  <a class="disabled">6 · Agenten</a>
+  <a class="disabled">7 · Automatisieren</a>
+  <a class="disabled">8 · Oberflächen</a>
+  <a class="disabled">9 · Nachschlagen</a>
+
+  <h4>In diesem Kapitel</h4>
+  <div class="toc">
+    <a href="#warum"><span class="dot"></span>Warum es manchmal hakt</a>
+    <a href="#prompts"><span class="dot"></span>Gute Prompts schreiben</a>
+    <a href="#interview"><span class="dot"></span>Erst brainstormen</a>
+    <a href="#ablauf"><span class="dot"></span>Erkunden, planen, umsetzen</a>
+    <a href="#plan-modus"><span class="dot"></span>Der Plan-Modus</a>
+    <a href="#rezepte"><span class="dot"></span>Typische Abläufe</a>
+    <a href="#pruefen"><span class="dot"></span>Eine Prüfung mitgeben</a>
+    <a href="#regeln"><span class="dot"></span>Bitte oder Regel?</a>
+    <a href="#steuern"><span class="dot"></span>Die Sitzung steuern</a>
+    <a href="#effort"><span class="dot"></span>Effort &amp; Modell</a>
+    <a href="#modus-wahl"><span class="dot"></span>Den passenden Modus wählen</a>
+    <a href="#kosten"><span class="dot"></span>Kosten &amp; Kontext</a>
+    <a href="#allein"><span class="dot"></span>Claude allein arbeiten lassen</a>
+    <a href="#fehler"><span class="dot"></span>Typische Stolperfallen</a>
+    <a href="#faq"><span class="dot"></span>Häufige Fragen</a>
+    <a href="#quiz-sec"><span class="dot"></span>Quiz</a>
+    <a href="#karten"><span class="dot"></span>Merkkarten</a>
+  </div>
+</nav>
+
+<!-- ===================== Inhalt ===================== -->
+<main>
+<div class="content">
+
+<div class="hero">
+  <div class="kicker">Kapitel 2 von 9</div>
+  <h1>Richtig arbeiten: bessere Ergebnisse mit weniger Korrekturen</h1>
+  <p>Wie du Aufgaben so stellst, dass Claude beim ersten Mal das Richtige baut, wie du den bewährten Ablauf aus Erkunden, Planen, Umsetzen und Prüfen nutzt und wie du eine Sitzung im Griff behältst.</p>
+  <div class="meta">
+    <span class="chip">⏱️ ca. 40 Minuten</span>
+    <span class="chip">🎯 Einsteiger bis Fortgeschrittene</span>
+    <span class="chip">❓ 12 Quizfragen</span>
+    <span class="chip">🃏 16 Merkkarten</span>
+  </div>
+</div>
+
+<!-- ============ 1 ============ -->
+<section class="lesson" id="warum" data-keywords="best practices grundidee standard warum fehler ursachen überblick">
+  <div class="sec-head"><span class="sec-num">1</span><h2>Warum es manchmal hakt</h2></div>
+  <p class="lead">Claude Code ist so gebaut, dass schon ein einfacher erster Prompt meistens das Richtige tut. Wenn nicht, steckt fast immer einer von vier Gründen dahinter.</p>
+
+  <p>Ohne dass du etwas einrichtest, erledigt Claude Code schon vieles von selbst: Neue Sitzungen im Terminal und in VS Code starten im Auto-Modus, sodass du nicht jeden Befehl absegnen musst. Unabhängige Teilarbeit gibt Claude an Helfer (Subagenten) ab. Und lange Gespräche werden automatisch zusammengefasst, bevor das Kontextfenster voll ist.</p>
+  <p>Schwierig wird es dort, wo dein Projekt Wissen, Regeln oder Grenzen hat, die nicht im Code stehen. Kein Standard kann das erraten.</p>
+
+  <div class="grid c2">
+    <div class="card"><div class="emoji">🙈</div><h4>Es fehlt Wissen</h4><p>Claude baut etwas anderes als gedacht oder muss in jeder Sitzung dieselbe Sache neu herausfinden.</p><span class="tag">Lösung: sag, was es nicht sehen kann</span></div>
+    <div class="card"><div class="emoji">🤷</div><h4>„Fertig“, aber nicht ganz</h4><p>Claude meldet Erfolg, doch es funktioniert nicht. Meist hatte es keine Möglichkeit, sich selbst zu prüfen.</p><span class="tag">Lösung: gib ihm eine Prüfung</span></div>
+    <div class="card"><div class="emoji">🚫</div><h4>Eine Regel wurde gebrochen</h4><p>Claude tut etwas, das nie passieren darf, oder lässt einen Pflichtschritt aus.</p><span class="tag">Lösung: Regeln fest durchsetzen</span></div>
+    <div class="card"><div class="emoji">💸</div><h4>Zu teuer erkauft</h4><p>Das Ergebnis stimmt, aber es hat mehr Zeit, Token oder Rückfragen gekostet als nötig.</p><span class="tag">Lösung: eine Voreinstellung ändern</span></div>
+  </div>
+
+  <div class="box merke"><div class="box-title">📌 Merke</div>
+    <p>Bevor du an Einstellungen schraubst, frag dich: Fehlte Claude <b>Wissen</b>, eine <b>Prüfung</b>, eine <b>feste Regel</b> oder passte eine <b>Voreinstellung</b> nicht? Dieses Kapitel geht alle vier durch.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/best-practices" target="_blank" rel="noopener">📖 Original: Best Practices ↗</a>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="lesson" id="prompts" data-keywords="prompt prompten formulieren spezifisch konkret @ datei bild screenshot pipe ambitioniert be ambitious think step by step schlüsselwort">
+  <div class="sec-head"><span class="sec-num">2</span><h2>Gute Prompts schreiben</h2></div>
+  <p class="lead">Ein guter Prompt gibt Claude genau das, was es nicht selbst im Code findet. Mehr nicht.</p>
+
+  <p>Claude beginnt jede Aufgabe damit, deinen Code zu lesen, und darin ist es sehr gut. Dateistruktur, Konventionen, Test-Framework: das findet es meist schneller, als du es erklären könntest. Was es nicht finden kann, ist alles, was nie im Repo stand: eine Entscheidung aus einem Meeting, ein Ablauf, den nur eine Person im Kopf hat, oder welche von zwei guten Lösungen <i>du</i> bevorzugst.</p>
+
+  <h3>Die Faustregel: Ort, Symptom, Ziel</h3>
+  <p>Nenne <b>wo</b> du suchen würdest, <b>was</b> genau passiert und <b>woran</b> man erkennt, dass es gelöst ist. Das spart fast immer eine Korrekturrunde.</p>
+  <div class="compare">
+    <div class="bad"><b>❌ Vage</b>„Behebe den Login-Bug.“</div>
+    <div class="good"><b>✅ Spezifisch</b>„Nutzer melden, dass der Login nach einem Sitzungs-Timeout fehlschlägt. Schau dir den Token-Refresh in <code>src/auth/</code> an, schreib einen Test, der den Fehler nachstellt, und behebe ihn dann.“</div>
+  </div>
+  <div class="compare">
+    <div class="bad"><b>❌ Vage</b>„Füg ein Kalender-Widget hinzu.“</div>
+    <div class="good"><b>✅ Spezifisch</b>„Bau nach dem Muster von <code>HotDogWidget.php</code> ein Kalender-Widget, mit dem man einen Monat wählen und zwischen Jahren blättern kann. Keine neuen Bibliotheken.“</div>
+  </div>
+
+  <h3>Material direkt mitgeben statt beschreiben</h3>
+  <div class="grid c3">
+    <div class="card"><div class="emoji">📄</div><h4>Datei mit <code>@</code></h4><p>Tippe <code>@</code> und den Pfad, z. B. <code>@src/utils/auth.js</code>. Der Inhalt landet direkt in deiner Nachricht. Mit <code>@ordner/</code> geht es auch für Verzeichnisse.</p></div>
+    <div class="card"><div class="emoji">🖼️</div><h4>Bild</h4><p>Screenshot eines Fehlers oder Designs per Drag &amp; Drop, oder einfügen mit <kbd>Ctrl</kbd>+<kbd>V</kbd> (unter Windows <kbd>Alt</kbd>+<kbd>V</kbd>).</p></div>
+    <div class="card"><div class="emoji">📜</div><h4>Befehlsausgabe</h4><p>Aus der Shell hineinleiten: <code>cat error.log | claude -p "Was ist hier los?"</code></p></div>
+  </div>
+
+  <h3>„Denk Schritt für Schritt“ ist kein Zauberwort</h3>
+  <p>Sätze wie „denk gründlich nach“ oder „think step by step“ sind ganz normaler Text. Sie stupsen Claude höchstens leicht an. Wie viel Claude wirklich nachdenkt, steuerst du mit der <b>Effort-Stufe</b> (siehe <a href="#effort">Abschnitt 10</a>). Die einzige Ausnahme ist das Schlüsselwort <code>ultrathink</code>.</p>
+
+  <div class="box tipp"><div class="box-title">💡 Tipp: „Sei ambitioniert“</div>
+    <p>Claude liest eine Anfrage eher zurückhaltend und baut das Kleinste, was sie erfüllt. Es kann ja nicht sehen, wie viel du dir erhoffst. Willst du die umfassende Version, sag es:</p>
+    <div class="code"><span class="label">Prompt</span><pre>Bau die Einstellungsseite nach dem Mockup. Sei ambitioniert:
+leere Zustände und Fehlerzustände, Speichern funktioniert,
+Tastaturbedienung, nicht nur das Layout.</pre></div>
+    <p>Damit sagst du Claude, welchen <i>Umfang</i> du willst, nicht wie intensiv es denken soll.</p>
+  </div>
+
+  <div class="box info"><div class="box-title">ℹ️ Vage ist manchmal genau richtig</div>
+    <p>Wenn du nur erkunden willst, passt ein offener Prompt wie „Was würdest du an dieser Datei verbessern?“ völlig. Du korrigierst unterwegs etwas mehr, dafür entdeckst du Dinge, an die du nicht gedacht hättest.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/best-practices#sagen-sie-claude-was-es-nicht-sehen-kann" target="_blank" rel="noopener">📖 Original: Sagen Sie Claude, was es nicht sehen kann ↗</a>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="lesson" id="interview" data-keywords="brainstorming interview spezifikation spec.md anforderungen unklar idee multiple choice">
+  <div class="sec-head"><span class="sec-num">3</span><h2>Unklar, was du willst? Lass dich interviewen</h2></div>
+  <p class="lead">Du musst nicht alles fertig durchdacht haben, bevor du anfängst. Dreh den Spieß um und lass Claude die Fragen stellen.</p>
+
+  <div class="code"><span class="label">Prompt</span><pre>Ich will für die öffentliche API ein Rate-Limit einbauen, habe es mir
+aber noch nicht genau überlegt. Interview mich, bis du daraus eine
+Spezifikation schreiben kannst, und speichere sie dann in SPEC.md.</pre></div>
+
+  <ol class="steps">
+    <li><strong>Claude fragt nach</strong>
+      Es stellt dir Multiple-Choice-Fragen zu allem, was noch offen ist: Limit pro Nutzer oder pro Schlüssel? Was passiert mit Anfragen über dem Limit? Was gehört ausdrücklich <i>nicht</i> dazu?</li>
+    <li><strong>Die Spezifikation entsteht</strong>
+      Aus deinen Antworten schreibt Claude <code>SPEC.md</code>: eine schriftliche Definition von „fertig“.</li>
+    <li><strong>Frisch starten und bauen</strong>
+      Starte für die Umsetzung eine neue Sitzung (oder <code>/clear</code>). So beginnt die Arbeit mit sauberem Kontext und klarem Ziel.</li>
+    <li><strong>Später dagegen prüfen</strong>
+      Dieselbe Datei nutzt du am Ende, um das Ergebnis prüfen zu lassen (siehe <a href="#pruefen">Abschnitt 7</a>).</li>
+  </ol>
+
+  <div class="box beispiel"><div class="box-title">🧭 Beispiel außerhalb von Code</div>
+    <p>Das klappt auch für Nicht-Programmier-Aufgaben: „Ich will meine Fotosammlung neu ordnen. Interview mich zu meinen Wünschen und schreib dann einen Plan in PLAN.md.“</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/best-practices#brainstormen-sie-zuerst-mit-claude" target="_blank" rel="noopener">📖 Original: Brainstormen Sie zuerst mit Claude ↗</a>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="lesson" id="ablauf" data-keywords="workflow ablauf erkunden planen umsetzen prüfen commit explore plan code vorgehen">
+  <div class="sec-head"><span class="sec-num">4</span><h2>Der bewährte Ablauf: erkunden, planen, umsetzen, prüfen</h2></div>
+  <p class="lead">Bei größeren Aufgaben lohnt es sich, nicht gleich „Bau mal“ zu sagen, sondern in vier Etappen zu arbeiten.</p>
+
+  <figure class="diagram" data-stepper>
+    <svg viewBox="0 0 720 240" role="img" aria-label="Ablauf: Erkunden, Planen, Umsetzen, Prüfen, Abschließen">
+      <defs>
+        <marker id="k2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c96442"/></marker>
+        <marker id="k2g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8f897d"/></marker>
+      </defs>
+      <g data-node="erkunden">
+        <rect x="10" y="40" width="125" height="76" rx="14" class="svg-blue"/>
+        <text x="72" y="72" text-anchor="middle" class="svg-t">🔎 Erkunden</text>
+        <text x="72" y="94" text-anchor="middle" class="svg-s">lesen, verstehen</text>
+      </g>
+      <path d="M137 78 L163 78" class="svg-arrow-accent" marker-end="url(#k2a)"/>
+      <g data-node="planen">
+        <rect x="165" y="40" width="125" height="76" rx="14" class="svg-violet"/>
+        <text x="227" y="72" text-anchor="middle" class="svg-t">📋 Planen</text>
+        <text x="227" y="94" text-anchor="middle" class="svg-s">Plan-Modus</text>
+      </g>
+      <path d="M292 78 L318 78" class="svg-arrow-accent" marker-end="url(#k2a)"/>
+      <g data-node="umsetzen">
+        <rect x="320" y="40" width="125" height="76" rx="14" class="svg-accent"/>
+        <text x="382" y="72" text-anchor="middle" class="svg-t">✍️ Umsetzen</text>
+        <text x="382" y="94" text-anchor="middle" class="svg-s">Code ändern</text>
+      </g>
+      <path d="M447 78 L473 78" class="svg-arrow-accent" marker-end="url(#k2a)"/>
+      <g data-node="pruefen">
+        <rect x="475" y="40" width="110" height="76" rx="14" class="svg-yellow"/>
+        <text x="530" y="72" text-anchor="middle" class="svg-t">✅ Prüfen</text>
+        <text x="530" y="94" text-anchor="middle" class="svg-s">Tests, Belege</text>
+      </g>
+      <path d="M587 78 L613 78" class="svg-arrow-accent" marker-end="url(#k2a)"/>
+      <g data-node="abschluss">
+        <rect x="615" y="40" width="95" height="76" rx="14" class="svg-green"/>
+        <text x="662" y="72" text-anchor="middle" class="svg-t">🏁 Commit</text>
+        <text x="662" y="94" text-anchor="middle" class="svg-s">oder PR</text>
+      </g>
+      <!-- Rückweg -->
+      <path d="M530 118 Q530 190 382 190 Q330 190 382 120" class="svg-arrow" stroke-dasharray="5 5" marker-end="url(#k2g)"/>
+      <text x="455" y="212" text-anchor="middle" class="svg-s">Prüfung rot? Zurück zum Umsetzen</text>
+      <path d="M227 118 Q227 170 120 170 Q72 170 72 120" class="svg-arrow" stroke-dasharray="5 5" marker-end="url(#k2g)"/>
+      <text x="150" y="192" text-anchor="middle" class="svg-s">Plan unklar? Mehr erkunden</text>
+    </svg>
+    <div class="loop-steps">
+      <button type="button" data-step="erkunden" data-text="<b>1. Erkunden.</b> Lass Claude den betroffenen Teil lesen und erklären, ohne etwas zu ändern: „Lies die Dateien unter src/auth und erklär mir, wie Sitzungen und Login funktionieren.“ So siehst du, ob Claude das Problem richtig versteht.">1 · Erkunden</button>
+      <button type="button" data-step="planen" data-text="<b>2. Planen.</b> Im Plan-Modus schlägt Claude ein Vorgehen vor und ändert noch nichts. Du kannst den Plan mit <kbd>Ctrl</kbd>+<kbd>G</kbd> im Editor bearbeiten, Rückfragen stellen oder ihn ablehnen.">2 · Planen</button>
+      <button type="button" data-step="umsetzen" data-text="<b>3. Umsetzen.</b> Wenn du den Plan genehmigst, verlässt Claude den Plan-Modus und beginnt mit den Änderungen. Bitte es, dabei gleich die Tests laufen zu lassen.">3 · Umsetzen</button>
+      <button type="button" data-step="pruefen" data-text="<b>4. Prüfen.</b> Tests, Build, Linter oder ein Screenshot zeigen, ob es wirklich funktioniert. Lass dir die Ausgabe als Beleg zeigen. Ist etwas rot, geht es zurück zu Schritt 3.">4 · Prüfen</button>
+      <button type="button" data-step="abschluss" data-text="<b>5. Abschließen.</b> „Committe mit einer passenden Nachricht“ oder „Öffne einen Pull Request“. Claude schreibt die Beschreibung selbst.">5 · Abschluss</button>
+    </div>
+    <div class="loop-explain"></div>
+    <figcaption>Klick auf die Schritte, um sie nacheinander zu sehen.</figcaption>
+  </figure>
+
+  <div class="box tipp"><div class="box-title">💡 Nicht für jede Aufgabe</div>
+    <p>Planen kostet Zeit. Für eine kleine, klare Änderung (Tippfehler, Umbenennung, eine Zeile Log) sag einfach direkt, was du willst. Den vollen Ablauf brauchst du, wenn du dir beim Weg unsicher bist, mehrere Dateien betroffen sind oder du den Code nicht gut kennst.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/common-workflows" target="_blank" rel="noopener">📖 Original: Häufige Workflows ↗</a>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="lesson" id="plan-modus" data-keywords="plan modus plan mode shift+tab /plan ctrl+g plan genehmigen ablehnen keep planning permission-mode plan">
+  <div class="sec-head"><span class="sec-num">5</span><h2>Der Plan-Modus im Detail</h2></div>
+  <p class="lead">Im Plan-Modus darf Claude lesen, suchen und erkunden, aber keine Dateien ändern, bis du den Plan freigibst.</p>
+
+  <h3>So kommst du hinein</h3>
+  <div class="tabs" data-group="plan">
+    <div class="tab-list">
+      <button type="button">⌨️ Während der Sitzung</button>
+      <button type="button">✏️ Für einen einzelnen Prompt</button>
+      <button type="button">🚀 Schon beim Start</button>
+    </div>
+    <div class="tab-panel">
+      <p>Drück <kbd>Shift</kbd>+<kbd>Tab</kbd>, bis unten <code>⏸ plan mode on</code> steht. Nochmal <kbd>Shift</kbd>+<kbd>Tab</kbd> verlässt den Modus wieder.</p>
+    </div>
+    <div class="tab-panel">
+      <p>Stell dem Prompt <code>/plan</code> voran:</p>
+      <div class="code"><span class="label">Prompt</span><pre>/plan Wie würdest du die Benutzerverwaltung auf die neue Datenbank umziehen?</pre></div>
+    </div>
+    <div class="tab-panel">
+      <div class="code"><span class="label">Terminal</span><pre>claude --permission-mode plan</pre></div>
+      <p>Wer immer mit einem Plan starten will, kann den Plan-Modus pro Projekt als Standard festlegen. Das zeigen wir in <b>Kapitel 4</b>.</p>
+    </div>
+  </div>
+
+  <h3>Den Plan prüfen und freigeben</h3>
+  <p>Ist der Plan fertig, zeigt Claude ihn und fragt, wie es weitergehen soll:</p>
+  <div class="table-wrap"><table>
+    <tr><th>Auswahl</th><th>Was dann passiert</th></tr>
+    <tr><td><b>Yes, and use auto mode</b></td><td>Plan genehmigt, Claude setzt ihn im Auto-Modus um, ohne bei Alltäglichem zu fragen.</td></tr>
+    <tr><td><b>Yes, manually approve edits</b></td><td>Plan genehmigt, du bestätigst aber jede einzelne Änderung.</td></tr>
+    <tr><td><b>No, keep planning</b></td><td>Du bleibst im Plan-Modus und sagst Claude, was am Plan anders werden soll.</td></tr>
+  </table></div>
+
+  <div class="box tipp"><div class="box-title">💡 Plan selbst bearbeiten</div>
+    <p>Drück <kbd>Ctrl</kbd>+<kbd>G</kbd>, um den Plan in deinem Texteditor zu öffnen. Streich Schritte, ergänze Hinweise, speichere, und Claude arbeitet mit deiner Fassung weiter.</p>
+  </div>
+  <div class="box achtung"><div class="box-title">⚠️ Achtung bei Shift+Tab</div>
+    <p>Wenn die Genehmigungsabfrage offen ist, <b>genehmigt</b> <kbd>Shift</kbd>+<kbd>Tab</kbd> den Plan. Willst du nur raus, drück zuerst <kbd>Esc</kbd>.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/permission-modes#vor-dem-bearbeiten-analysieren-mit-dem-plan-modus" target="_blank" rel="noopener">📖 Original: Plan-Modus ↗</a>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="lesson" id="rezepte" data-keywords="rezepte prompt beispiele codebase verstehen fehler beheben debuggen refaktorieren tests pull request dokumentation workflows">
+  <div class="sec-head"><span class="sec-num">6</span><h2>Typische Abläufe als Prompt-Rezepte</h2></div>
+  <p class="lead">Für die häufigsten Aufgaben gibt es bewährte Formulierungen. Nimm sie als Startpunkt und pass sie an.</p>
+
+  <div class="tabs" data-group="rezepte">
+    <div class="tab-list">
+      <button type="button">🗺️ Projekt verstehen</button>
+      <button type="button">🐞 Fehler beheben</button>
+      <button type="button">🧹 Umbauen</button>
+      <button type="button">🧪 Tests</button>
+      <button type="button">🌿 Pull Request</button>
+      <button type="button">📝 Doku</button>
+    </div>
+    <div class="tab-panel">
+      <p>Erst den Überblick, dann immer genauer werden.</p>
+      <div class="code"><span class="label">Prompts</span><pre>Gib mir einen Überblick über dieses Projekt.
+Erklär mir die wichtigsten Muster in der Architektur.
+Wo wird die Benutzer-Anmeldung behandelt?
+Verfolge den Ablauf beim Login vom Frontend bis zur Datenbank.</pre></div>
+      <p>Tipp: Frag nach Begriffen aus deinem Fachgebiet. Claude findet die passenden Stellen.</p>
+    </div>
+    <div class="tab-panel">
+      <p>Gib die Fehlermeldung und, wenn möglich, wie man den Fehler auslöst.</p>
+      <div class="code"><span class="label">Prompts</span><pre>Beim Ausführen von npm test kommt ein Fehler. Hier ist er: [Fehler einfügen]
+Schlag mir ein paar Wege vor, den Fehler zu beheben.
+Behebe ihn mit dem Ansatz, der die Ursache angeht, nicht nur das Symptom.</pre></div>
+      <p>Sag Claude, ob der Fehler immer oder nur manchmal auftritt, und wie man ihn nachstellt.</p>
+    </div>
+    <div class="tab-panel">
+      <p>Erst finden, dann Vorschläge, dann in kleinen, geprüften Schritten umbauen.</p>
+      <div class="code"><span class="label">Prompts</span><pre>Finde veraltete API-Aufrufe in unserem Projekt.
+Schlag vor, wie wir utils.js modernisieren können.
+Bau es um, aber das Verhalten muss gleich bleiben.
+Lass danach die Tests für den umgebauten Code laufen.</pre></div>
+    </div>
+    <div class="tab-panel">
+      <p>Claude schaut sich deine bestehenden Tests an und übernimmt Stil und Framework.</p>
+      <div class="code"><span class="label">Prompts</span><pre>Finde Funktionen in NotificationsService.swift, die nicht getestet sind.
+Schreib Tests dafür.
+Ergänze Grenzfälle: leere Eingaben, sehr große Werte, Netzwerkfehler.
+Lass die neuen Tests laufen und behebe, was fehlschlägt.</pre></div>
+    </div>
+    <div class="tab-panel">
+      <div class="code"><span class="label">Prompts</span><pre>Fasse meine Änderungen zusammen.
+Erstell einen Pull Request.
+Ergänze die Beschreibung um den Sicherheitsaspekt.</pre></div>
+      <p>Braucht <code>git</code> und am besten die GitHub-CLI <code>gh</code>, angemeldet. Dann öffnet Claude den PR direkt.</p>
+    </div>
+    <div class="tab-panel">
+      <div class="code"><span class="label">Prompts</span><pre>Finde Funktionen ohne passende Kommentare im Ordner auth.
+Ergänze Kommentare im Stil des Projekts.
+Prüf, ob die README noch zum aktuellen Stand passt.</pre></div>
+    </div>
+  </div>
+
+  <div class="box tipp"><div class="box-title">💡 Frag Claude nach Claude</div>
+    <p>Unsicher, wie man etwas am besten angeht? Frag einfach: „Wie würdest du hier vorgehen?“ oder „Was kannst du mit Bildern machen?“. Claude kennt seine eigene Dokumentation.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/common-workflows" target="_blank" rel="noopener">📖 Original: Prompt-Rezepte ↗</a>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="lesson" id="pruefen" data-keywords="prüfung test verifizieren belege nachweis /goal /code-review /verify stop hook fertig selbst prüfen review spec">
+  <div class="sec-head"><span class="sec-num">7</span><h2>Gib Claude eine Prüfung mit</h2></div>
+  <p class="lead">Claude hört auf, wenn die Arbeit fertig <i>aussieht</i>. Kann es nicht nachprüfen, ob sie fertig <i>ist</i>, wirst du selbst zur Testabteilung.</p>
+
+  <p>Gib Claude etwas, das mit <b>bestanden</b> oder <b>fehlgeschlagen</b> antwortet. Dann schließt Claude die Schleife selbst: ändern, prüfen, Fehler lesen, verbessern, erneut prüfen. Und du musst nicht danebensitzen.</p>
+
+  <div class="grid c3">
+    <div class="card"><div class="emoji">🧪</div><h4>Tests</h4><p>Eine Testdatei oder die ganze Test-Suite.</p></div>
+    <div class="card"><div class="emoji">🏗️</div><h4>Build &amp; Typecheck</h4><p>Der Exit-Code sagt eindeutig: geht oder geht nicht.</p></div>
+    <div class="card"><div class="emoji">🧹</div><h4>Linter</h4><p>Stil- und Fehlerprüfung auf Knopfdruck.</p></div>
+    <div class="card"><div class="emoji">🔁</div><h4>Vergleichsskript</h4><p>Ausgabe gegen eine erwartete Datei prüfen.</p></div>
+    <div class="card"><div class="emoji">📸</div><h4>Screenshot</h4><p>Bei Oberflächen: Screenshot neben dem Mockup.</p></div>
+    <div class="card"><div class="emoji">📋</div><h4>Spezifikation</h4><p>Eine <code>SPEC.md</code>, gegen die geprüft wird.</p></div>
+  </div>
+
+  <h3>Wie streng soll die Prüfung sein?</h3>
+  <figure class="diagram">
+    <svg viewBox="0 0 720 170" role="img" aria-label="Prüfungen von 'Claude entscheidet' bis 'Claude Code setzt durch'">
+      <defs><linearGradient id="k2grad" x1="0" x2="1"><stop offset="0" stop-color="#2f6fb3"/><stop offset="1" stop-color="#c96442"/></linearGradient></defs>
+      <rect x="30" y="128" width="660" height="8" rx="4" fill="url(#k2grad)"/>
+      <text x="30" y="158" class="svg-s">Claude entscheidet selbst</text>
+      <text x="690" y="158" text-anchor="end" class="svg-s">Claude Code erzwingt es</text>
+      <g><rect x="20" y="14" width="155" height="96" rx="12" class="svg-blue"/><text x="97" y="42" text-anchor="middle" class="svg-t">💬 Im Prompt</text><text x="97" y="64" text-anchor="middle" class="svg-s">„Lass die Tests laufen,</text><text x="97" y="80" text-anchor="middle" class="svg-s">bis sie grün sind“</text></g>
+      <g><rect x="190" y="14" width="155" height="96" rx="12" class="svg-violet"/><text x="267" y="42" text-anchor="middle" class="svg-t">🎯 /goal</text><text x="267" y="64" text-anchor="middle" class="svg-s">ein zweites Modell prüft</text><text x="267" y="80" text-anchor="middle" class="svg-s">nach jedem Durchgang</text></g>
+      <g><rect x="360" y="14" width="155" height="96" rx="12" class="svg-yellow"/><text x="437" y="42" text-anchor="middle" class="svg-t">👀 /code-review</text><text x="437" y="64" text-anchor="middle" class="svg-s">frischer Prüfer, der den</text><text x="437" y="80" text-anchor="middle" class="svg-s">Weg dahin nicht kennt</text></g>
+      <g><rect x="530" y="14" width="170" height="96" rx="12" class="svg-accent"/><text x="615" y="42" text-anchor="middle" class="svg-t">🛑 Stop-Hook</text><text x="615" y="64" text-anchor="middle" class="svg-s">Claude darf erst aufhören,</text><text x="615" y="80" text-anchor="middle" class="svg-s">wenn dein Skript grün ist</text></g>
+    </svg>
+    <figcaption>Für die meisten Aufgaben reicht die Bitte im Prompt. Je unbeaufsichtigter Claude arbeitet, desto weiter rechts lohnt es sich.</figcaption>
+  </figure>
+
+  <div class="table-wrap"><table>
+    <tr><th>Variante</th><th>Wann sinnvoll</th></tr>
+    <tr><td><b>Im Prompt</b></td><td>Funktioniert sofort für jede Aufgabe, ohne Einrichtung. Claude entscheidet selbst, wann es zufrieden ist.</td></tr>
+    <tr><td><b><code>/goal</code></b></td><td>Z. B. <code>/goal alle Tests in tests/auth sind grün und der Linter meldet nichts</code>. Wichtig bei langen Läufen, bei denen Claude sonst mit einem Zwischenstand aufhören könnte.</td></tr>
+    <tr><td><b><code>/code-review</code></b></td><td>Ein neuer Subagent prüft deine Änderungen. Er hat das Gespräch nie gesehen und lässt sich nicht von der Begründung beeinflussen, die zum Code geführt hat.</td></tr>
+    <tr><td><b>Stop-Hook</b></td><td>Ein Skript, das bei jedem Versuch aufzuhören läuft und Claude zurückschickt, solange es fehlschlägt. Wie man Hooks baut, kommt in <b>Kapitel 5</b>.</td></tr>
+  </table></div>
+
+  <div class="box merke"><div class="box-title">📌 Merke: Belege verlangen</div>
+    <p>„Alle Tests bestanden“ sagt wenig. Bitte Claude um den <b>ausgeführten Befehl und seine Ausgabe</b> oder um den Screenshot. Die Ausgabe zu lesen geht schneller, als selbst noch einmal zu prüfen. Und bei einer Sitzung, die du nicht beobachtet hast, ist das dein einziger Beweis.</p>
+  </div>
+
+  <h3>Gegen deine Spezifikation prüfen lassen</h3>
+  <div class="code"><span class="label">Prompt</span><pre>Lass einen Subagenten den Rate-Limiter-Diff gegen SPEC.md prüfen:
+Ist jede Anforderung umgesetzt, haben die genannten Grenzfälle Tests?
+Melde nur Lücken, die die Korrektheit betreffen, und lass Stilfragen weg.</pre></div>
+  <div class="box achtung"><div class="box-title">⚠️ „Stil weglassen“ nicht vergessen</div>
+    <p>Ein Prüfer, der Probleme finden soll, findet <i>immer</i> etwas. Wer jeden Befund umsetzt, landet bei unnötigen Abstraktionen und Tests für Fälle, die nie eintreten.</p>
+  </div>
+  <div class="box tipp"><div class="box-title">💡 /verify</div>
+    <p>Wenn Claude fertig ist, startet <code>/verify</code> die App, schaut sich das Ergebnis an und findet so Probleme, die Tests und Typecheck übersehen.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/best-practices#geben-sie-claude-eine-prüfung-zum-ausführen" target="_blank" rel="noopener">📖 Original: Geben Sie Claude eine Prüfung ↗</a>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="lesson" id="regeln" data-keywords="deterministisch nicht deterministisch regel richtlinie claude.md hook deny regel durchsetzen immer nie wichtig important">
+  <div class="sec-head"><span class="sec-num">8</span><h2>Bitte oder Regel? Zwei Arten von Anweisungen</h2></div>
+  <p class="lead">Manches darfst du Claude überlassen, manches muss jedes Mal so passieren. Dafür gibt es zwei verschiedene Werkzeuge.</p>
+
+  <div class="grid c2">
+    <div class="card"><div class="emoji">🧠</div><h4>Bitte (Claude entscheidet)</h4><p>Dein Prompt, die <code>CLAUDE.md</code>, ein Skill. Claude liest es und folgt dem fast immer, aber es gibt keine Garantie. Es darf entscheiden, dass eine Richtlinie hier nicht passt.</p><span class="tag">für Richtlinien mit Ausnahmen</span></div>
+    <div class="card" style="border-color:var(--accent)"><div class="emoji">⚙️</div><h4>Regel (Claude Code setzt durch)</h4><p>Ein Hook, eine Verbotsregel (<code>deny</code>), eine verwaltete Einstellung. Claude Code wendet sie jedes Mal an, egal was das Modell denkt.</p><span class="tag">für „immer“ und „nie“</span></div>
+  </div>
+
+  <div class="table-wrap"><table>
+    <tr><th></th><th>Claude entscheidet</th><th>Claude Code setzt durch</th></tr>
+    <tr><td><b>Was zu tun ist</b></td><td>Prompt, <code>CLAUDE.md</code>, Skills</td><td>Hooks, Skills, die nur du startest</td></tr>
+    <tr><td><b>Worauf es zugreift</b></td><td>der Prüfer im Auto-Modus</td><td><code>deny</code>-Regeln, Sandbox</td></tr>
+    <tr><td><b>Wann es fertig ist</b></td><td>Bitte um Belege, <code>/goal</code>, <code>/code-review</code></td><td>Tests, Stop-Hook, CI</td></tr>
+    <tr><td><b>Wie viel es ausgibt</b></td><td>Effort-Stufe</td><td>Turn- oder Budget-Limit</td></tr>
+  </table></div>
+
+  <div class="box beispiel"><div class="box-title">🧭 Beispiel</div>
+    <p>„Bevorzuge benannte Exporte“ ist eine Vorliebe mit vielen Ausnahmen: gehört in die <code>CLAUDE.md</code>. „Lies niemals <code>.env</code>“ darf keine Ausnahme haben: gehört in eine <code>deny</code>-Regel. „Nach jeder Änderung Formatierer laufen lassen“: gehört in einen Hook.</p>
+  </div>
+  <div class="box tipp"><div class="box-title">💡 Das Warnsignal</div>
+    <p>Wenn du eine Zeile in der <code>CLAUDE.md</code> immer lauter formulierst („WICHTIG!“, „IMMER!“) und Claude sie trotzdem übersieht, gehört sie in einen Hook. Und umgekehrt: Hooks für reine Vorlieben kannst du löschen und Claude entscheiden lassen.</p>
+  </div>
+  <p>Die <code>CLAUDE.md</code> lernst du in <b>Kapitel 3</b> kennen, Berechtigungsregeln und Sandbox in <b>Kapitel 4</b>, Hooks und Skills in <b>Kapitel 5</b>.</p>
+  <a class="source" href="https://code.claude.com/docs/de/best-practices#deterministische-und-nicht-deterministische-anweisungen" target="_blank" rel="noopener">📖 Original: Deterministische Anweisungen ↗</a>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="lesson" id="steuern" data-keywords="steuern esc stoppen rewind zurückspulen /rewind /undo /clear korrigieren zwei korrekturen /btw /rename resume continue nachricht einreihen umlenken">
+  <div class="sec-head"><span class="sec-num">9</span><h2>Die Sitzung steuern</h2></div>
+  <p class="lead">Keine Einstellung ersetzt es, die erste Minute zuzuschauen und einzugreifen, sobald Claude in die falsche Richtung läuft.</p>
+
+  <h3>Die drei wichtigsten Griffe</h3>
+  <div class="grid c3">
+    <div class="card"><div class="emoji">✋</div><h4><kbd>Esc</kbd></h4><p>Stoppt Claude mitten in der Arbeit. Alles bis dahin bleibt erhalten, du kannst direkt umlenken.</p></div>
+    <div class="card"><div class="emoji">⏪</div><h4><code>/rewind</code> oder <kbd>Esc</kbd> <kbd>Esc</kbd></h4><p>Spult Code, Gespräch oder beides zu einem früheren Prompt zurück. Alias: <code>/undo</code>.</p></div>
+    <div class="card"><div class="emoji">🧽</div><h4><code>/clear</code></h4><p>Frischer Start ohne den bisherigen Verlauf. Das alte Gespräch bleibt über <code>/resume</code> erreichbar.</p></div>
+  </div>
+
+  <h3>Die Zwei-Korrekturen-Regel</h3>
+  <figure class="diagram">
+    <svg viewBox="0 0 720 200" role="img" aria-label="Nach zwei erfolglosen Korrekturen lieber neu starten">
+      <defs><marker id="k2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c96442"/></marker></defs>
+      <g><rect x="10" y="60" width="120" height="70" rx="14" class="svg-box"/><text x="70" y="90" text-anchor="middle" class="svg-t">📝 Prompt</text><text x="70" y="110" text-anchor="middle" class="svg-s">Ergebnis daneben</text></g>
+      <path d="M132 95 L168 95" class="svg-arrow-accent" marker-end="url(#k2b)"/>
+      <g><rect x="170" y="60" width="130" height="70" rx="14" class="svg-yellow"/><text x="235" y="90" text-anchor="middle" class="svg-t">🔧 Korrektur 1</text><text x="235" y="110" text-anchor="middle" class="svg-s">„Nicht ganz …“</text></g>
+      <path d="M302 95 L338 95" class="svg-arrow-accent" marker-end="url(#k2b)"/>
+      <g><rect x="340" y="60" width="130" height="70" rx="14" class="svg-yellow"/><text x="405" y="90" text-anchor="middle" class="svg-t">🔧 Korrektur 2</text><text x="405" y="110" text-anchor="middle" class="svg-s">immer noch falsch</text></g>
+      <path d="M472 95 L508 95" class="svg-arrow-accent" marker-end="url(#k2b)"/>
+      <g><rect x="510" y="20" width="200" height="70" rx="14" class="svg-green"/><text x="610" y="50" text-anchor="middle" class="svg-t">✅ /clear + neuer Prompt</text><text x="610" y="70" text-anchor="middle" class="svg-s">mit dem, was du gelernt hast</text></g>
+      <g><rect x="510" y="110" width="200" height="70" rx="14" class="svg-box" stroke-dasharray="5 5"/><text x="610" y="140" text-anchor="middle" class="svg-t">❌ Korrektur 3</text><text x="610" y="160" text-anchor="middle" class="svg-s">meist Zeitverschwendung</text></g>
+    </svg>
+    <figcaption>Jede Korrektur bleibt im Verlauf. Nach zwei Fehlversuchen liest Claude ständig mit, was alles nicht geklappt hat.</figcaption>
+  </figure>
+  <p>Wenn du dasselbe zweimal korrigiert hast und es immer noch nicht stimmt, fügt eine dritte Korrektur vor allem weiteren Ballast hinzu. Ein frischer Start mit einem Prompt, der das Gelernte gleich einbaut, klappt fast immer besser.</p>
+
+  <h3>Das Rewind-Menü</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Option</th><th>Was sie tut</th></tr>
+    <tr><td><b>Restore code and conversation</b></td><td>Code und Gespräch zurück auf diesen Punkt</td></tr>
+    <tr><td><b>Restore conversation</b></td><td>Nur das Gespräch zurück, der Code bleibt wie er ist</td></tr>
+    <tr><td><b>Restore code</b></td><td>Nur die Dateiänderungen zurück, das Gespräch bleibt</td></tr>
+    <tr><td><b>Summarize from here</b></td><td>Alles ab hier zu einer Zusammenfassung verdichten, schafft Platz</td></tr>
+    <tr><td><b>Summarize up to here</b></td><td>Alles vor diesem Punkt verdichten, Späteres bleibt unverändert</td></tr>
+  </table></div>
+  <div class="box tipp"><div class="box-title">💡 Mutig ausprobieren</div>
+    <p>Weil Zurückspulen so einfach ist, kannst du zuerst den mutigeren Ansatz probieren lassen. Klappt er nicht, spulst du zurück und nimmst den sicheren Weg.</p>
+  </div>
+  <div class="box achtung"><div class="box-title">⚠️ Checkpoints ersetzen kein Git</div>
+    <p>Zurückgespult werden nur Dateien, die Claude mit seinen eigenen Bearbeitungs-Tools geändert hat. Was nur ein Shell-Befehl verändert hat, was ein Hintergrund-Subagent geändert hat oder was du selbst nebenher bearbeitet hast, bleibt wie es ist. Nutze deshalb immer auch git.</p>
+  </div>
+
+  <h3>Kleine Helfer</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Befehl</th><th>Wofür</th></tr>
+    <tr><td><code>/btw</code></td><td>Eine kurze Zwischenfrage stellen, ohne dass sie im Verlauf landet</td></tr>
+    <tr><td><code>/rename name</code></td><td>Der Sitzung einen Namen geben, z. B. <code>/rename oauth-umbau</code></td></tr>
+    <tr><td><code>claude --resume name</code></td><td>Eine benannte Sitzung später wieder aufnehmen, samt Checkpoints</td></tr>
+    <tr><td><code>claude --continue</code></td><td>Die letzte Sitzung im Ordner fortsetzen</td></tr>
+    <tr><td>Tippen während Claude arbeitet</td><td>Deine Nachricht wird eingereiht und nach dem aktuellen Schritt gelesen</td></tr>
+  </table></div>
+  <a class="source" href="https://code.claude.com/docs/de/best-practices#steuern-sie-die-sitzung" target="_blank" rel="noopener">📖 Original: Steuern Sie die Sitzung ↗</a>
+  <a class="source" href="https://code.claude.com/docs/de/checkpointing" target="_blank" rel="noopener">📖 Original: Checkpointing ↗</a>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="lesson" id="effort" data-keywords="effort anstrengung denken nachdenken /effort low medium high xhigh max ultrathink modell /model opus sonnet haiku fable">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Effort und Modell: wie viel Denken soll es sein?</h2></div>
+  <p class="lead">Die Effort-Stufe ist der wichtigste Regler dafür, wie gründlich Claude nachdenkt. Sie ersetzt fast alles, was man früher mit Zauberformeln im Prompt versucht hat.</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 720 150" role="img" aria-label="Effort-Stufen von low bis max">
+      <defs><linearGradient id="k2eff" x1="0" x2="1"><stop offset="0" stop-color="#3f8f5a"/><stop offset="1" stop-color="#c96442"/></linearGradient></defs>
+      <rect x="30" y="112" width="660" height="8" rx="4" fill="url(#k2eff)"/>
+      <text x="30" y="142" class="svg-s">schneller, günstiger</text>
+      <text x="690" y="142" text-anchor="end" class="svg-s">gründlicher, mehr Token</text>
+      <g><rect x="20" y="20" width="118" height="72" rx="12" class="svg-green"/><text x="79" y="50" text-anchor="middle" class="svg-t">low</text><text x="79" y="72" text-anchor="middle" class="svg-s">Entwürfe, Ideen</text></g>
+      <g><rect x="156" y="20" width="118" height="72" rx="12" class="svg-blue" stroke-width="3"/><text x="215" y="50" text-anchor="middle" class="svg-t">medium ⭐</text><text x="215" y="72" text-anchor="middle" class="svg-s">Standard, Alltag</text></g>
+      <g><rect x="292" y="20" width="118" height="72" rx="12" class="svg-violet"/><text x="351" y="50" text-anchor="middle" class="svg-t">high</text><text x="351" y="72" text-anchor="middle" class="svg-s">knifflige Fehler</text></g>
+      <g><rect x="428" y="20" width="118" height="72" rx="12" class="svg-yellow"/><text x="487" y="50" text-anchor="middle" class="svg-t">xhigh</text><text x="487" y="72" text-anchor="middle" class="svg-s">noch tiefer</text></g>
+      <g><rect x="564" y="20" width="136" height="72" rx="12" class="svg-accent"/><text x="632" y="50" text-anchor="middle" class="svg-t">max</text><text x="632" y="72" text-anchor="middle" class="svg-s">harte Nüsse, allein</text></g>
+    </svg>
+    <figcaption>⭐ Die aktuellen Modelle starten auf <code>medium</code>.</figcaption>
+  </figure>
+
+  <div class="table-wrap"><table>
+    <tr><th>Stufe</th><th>Wann sinnvoll</th></tr>
+    <tr><td><code>low</code></td><td>Schnelles Hin und Her, bei dem du jedes Ergebnis ohnehin anschaust: Brainstorming, erster Entwurf, Umbenennung über ein paar Dateien.</td></tr>
+    <tr><td><code>medium</code></td><td>Standard. Passt für alltägliche Arbeit mit klarem Umfang, z. B. eine neue Funktion bauen.</td></tr>
+    <tr><td><code>high</code> / <code>xhigh</code></td><td>Wenn es auf leicht übersehene Fälle ankommt: Fehler in fremdem Code, wackelige Tests, eine Schemaänderung, bei der jede Stelle gefunden werden muss.</td></tr>
+    <tr><td><code>max</code></td><td>Schwere Probleme, die Claude ohne dich durcharbeiten soll, etwa die Suche nach einer Sicherheitslücke. Bei normalen Aufgaben denkt es dann eher zu viel und kostet mehr, ohne besser zu sein.</td></tr>
+  </table></div>
+
+  <h3>So stellst du es ein</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Weg</th><th>Wirkung</th></tr>
+    <tr><td><code>/effort</code></td><td>Öffnet einen Schieberegler. <kbd>Enter</kbd> speichert als Standard, <kbd>s</kbd> gilt nur für diese Sitzung.</td></tr>
+    <tr><td><code>/effort high</code></td><td>Stellt die Stufe direkt ein.</td></tr>
+    <tr><td><code>claude --effort low</code></td><td>Stufe für eine einzelne Sitzung beim Start.</td></tr>
+    <tr><td><code>ultrathink</code> im Prompt</td><td>Nur für <b>diese eine</b> Nachricht tiefer nachdenken, ohne die Einstellung zu ändern. Im Terminal erscheint das Wort in Regenbogenfarben.</td></tr>
+  </table></div>
+
+  <h3>Und welches Modell?</h3>
+  <div class="grid c3">
+    <div class="card"><div class="emoji">🎼</div><h4>Opus</h4><p>Standardmodell auf den meisten Plänen. Erledigt die meisten Programmieraufgaben sehr gut.</p></div>
+    <div class="card"><div class="emoji">🎵</div><h4>Sonnet</h4><p>Günstiger für alltägliche Arbeit.</p></div>
+    <div class="card"><div class="emoji">🍃</div><h4>Haiku</h4><p>Klein und schnell. Gut für Helfer (Subagenten) mit einfachen Aufgaben.</p></div>
+  </div>
+  <p>Wechseln mit <code>/model</code>. Dort kannst du mit den Pfeiltasten links/rechts auch gleich den Effort anpassen.</p>
+  <a class="source" href="https://code.claude.com/docs/de/model-config#effort-stufe-anpassen" target="_blank" rel="noopener">📖 Original: Effort-Stufe anpassen ↗</a>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="lesson" id="modus-wahl" data-keywords="berechtigungsmodus wählen manual auto bypasspermissions accept edits rückfragen genehmigen klassifikator /fewer-permission-prompts">
+  <div class="sec-head"><span class="sec-num">11</span><h2>Den passenden Berechtigungsmodus wählen</h2></div>
+  <p class="lead">Die Modi kennst du aus Kapitel 1. Hier geht es darum, welcher für deine Arbeitsweise passt.</p>
+
+  <div class="grid c3">
+    <div class="card"><div class="emoji">✋</div><h4>Manual</h4><p>Du genehmigst jede Änderung selbst. Sicher, aber nach der zehnten Frage klickst du ohne zu lesen, und ohne dich geht nichts weiter.</p><span class="tag">gut zum Lernen</span></div>
+    <div class="card" style="border-color:var(--accent)"><div class="emoji">🤖</div><h4>Auto</h4><p>Standard. Claude arbeitet durch, ein separater Prüfer stoppt Riskantes: z. B. <code>curl | bash</code>, Produktions-Deployments, Force-Push über fremde Arbeit, sensible Daten nach außen.</p><span class="tag">der gute Mittelweg</span></div>
+    <div class="card"><div class="emoji">⚡</div><h4>bypassPermissions</h4><p>Genehmigt alles, was keine Verbotsregel abdeckt. Nur in einem Wegwerf-Container sinnvoll.</p><span class="tag">mit Vorsicht</span></div>
+  </div>
+
+  <div class="box info"><div class="box-title">ℹ️ Wenn der Auto-Modus blockiert</div>
+    <p>Du bekommst einen Hinweis, und die Aktion steht unter <b>Recently blocked</b> in <code>/permissions</code>. Dort kannst du sie freigeben. Nach drei Blockaden hintereinander (oder zwanzig insgesamt) pausiert der Auto-Modus und fragt wieder dich.</p>
+  </div>
+  <div class="box achtung"><div class="box-title">⚠️ Gesagt ist nicht gesichert</div>
+    <p>„Pushe nicht, bevor ich es geprüft habe“ im Gespräch nimmt der Prüfer ernst. Aber der Satz kann beim Zusammenfassen des Gesprächs verloren gehen. Was wirklich wichtig ist, gehört in eine feste Regel (Kapitel 4).</p>
+  </div>
+  <div class="box tipp"><div class="box-title">💡 Zu viele Rückfragen?</div>
+    <p><code>/fewer-permission-prompts</code> durchsucht deine letzten Sitzungen nach häufigen, nur lesenden Befehlen und schlägt vor, sie dauerhaft zu erlauben.</p>
+  </div>
+  <a class="source" href="https://code.claude.com/docs/de/best-practices#ändern-sie-den-berechtigungsmodus" target="_blank" rel="noopener">📖 Original: Berechtigungsmodus ändern ↗</a>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="lesson" id="kosten" data-keywords="kosten token verbrauch /usage /clear /compact kontext cache subagenten sparen günstig">
+  <div class="sec-head"><span class="sec-num">12</span><h2>Kosten und Kontext im Blick behalten</h2></div>
+  <p class="lead">Jede Anfrage schickt das ganze bisherige Gespräch mit. Eine Sitzung, die drei fremde Aufgaben angesammelt hat, bezahlt bei der vierten alle drei mit.</p>
+
+  <div class="grid c2">
+    <div class="card"><div class="emoji">📊</div><h4><code>/usage</code></h4><p>Erste Anlaufstelle. Zeigt, wohin dein Verbrauch geht, aufgeschlüsselt nach Skills, Subagenten, Plugins und MCP-Servern, und warnt vor teuren Mustern.</p></div>
+    <div class="card"><div class="emoji">🧽</div><h4><code>/clear</code> zwischen Aufgaben</h4><p>Kostet nichts und die nächste Aufgabe zahlt nicht für den alten Verlauf. <code>/clear oauth-umbau</code> benennt dabei die alte Sitzung.</p></div>
+    <div class="card"><div class="emoji">🗜️</div><h4><code>/compact</code> mit Fokus</h4><p>Z. B. <code>/compact behalte die API-Änderungen und die Testbefehle</code>. Achtung: Das Zusammenfassen liest selbst das ganze Gespräch und ist eine große Anfrage.</p></div>
+    <div class="card"><div class="emoji">👥</div><h4>Subagenten kosten mit</h4><p>Jeder Helfer schickt eigene Anfragen, die zu deiner Nutzung zählen. Er bringt Parallelität und frischen Blick, aber keine klügere Antwort.</p></div>
+  </div>
+
+  <div class="box info"><div class="box-title">ℹ️ Der Cache</div>
+    <p>Bereits gesendete Teile des Gesprächs werden zwischengespeichert und sind dann günstiger. Bei einem Abo hält dieser Cache etwa eine Stunde. Nach einer längeren Pause ist eine neue Sitzung daher oft günstiger als weiterzumachen.</p>
+  </div>
+  <p>Kontextfenster, <code>CLAUDE.md</code> und das Gedächtnis vertiefen wir in <b>Kapitel 3</b>, Subagenten in <b>Kapitel 6</b>.</p>
+  <a class="source" href="https://code.claude.com/docs/de/best-practices#halten-sie-kosten-und-kontext-gering" target="_blank" rel="noopener">📖 Original: Kosten und Kontext gering halten ↗</a>
+</section>
+
+<!-- ============ 13 ============ -->
+<section class="lesson" id="allein" data-keywords="unbeaufsichtigt allein nachts hintergrund fünf fragen max-turns budget worktree parallel claude -p skript">
+  <div class="sec-head"><span class="sec-num">13</span><h2>Claude allein arbeiten lassen</h2></div>
+  <p class="lead">Solange du zuschaust, fängst du Fehler nach ein, zwei Nachrichten ab. Bei einem Lauf über Nacht sagt es Claude niemand.</p>
+
+  <p>Bevor du eine Aufgabe unbeaufsichtigt laufen lässt, geh diese fünf Fragen durch:</p>
+  <ol class="steps">
+    <li><strong>Weiß es, wie „fertig“ aussieht?</strong>Ein Ziel, eine Spezifikationsdatei oder ein roter Test, der grün werden muss.</li>
+    <li><strong>Kann es seine Arbeit selbst prüfen?</strong>Test-Suite, Stop-Hook oder ein Review-Schritt.</li>
+    <li><strong>Was darf es anfassen?</strong>Berechtigungsregeln, Sandbox, ein eigener Worktree, nur ein bestimmter Branch.</li>
+    <li><strong>Was stoppt es?</strong>Ein Limit für Durchgänge (<code>--max-turns</code>) oder Kosten (<code>--max-budget-usd</code>).</li>
+    <li><strong>Wer gibt das Ergebnis frei?</strong>Ein Pull Request oder eine Zusammenfassung, und dann ein Mensch, der Merge oder Deployment genehmigt.</li>
+  </ol>
+
+  <div class="box tipp"><div class="box-title">💡 Klein anfangen</div>
+    <p>Lass einen neuen Ablauf zuerst mit drei Dateien laufen, schau, was schiefgeht, verbessere den Prompt, und erst dann den Rest. Und beobachte die ersten Läufe von allem Neuen, bevor du ihm blind vertraust.</p>
+  </div>
+  <p>Skripte mit <code>claude -p</code>, geplante Aufgaben und <code>/loop</code> sind Thema in <b>Kapitel 7</b>. Parallele Sitzungen mit Worktrees in <b>Kapitel 6</b>.</p>
+  <a class="source" href="https://code.claude.com/docs/de/best-practices#lassen-sie-claude-ohne-sie-arbeiten" target="_blank" rel="noopener">📖 Original: Claude ohne dich arbeiten lassen ↗</a>
+</section>
+
+<!-- ============ 14 ============ -->
+<section class="lesson" id="fehler" data-keywords="fehler stolperfallen anti pattern küchenspüle sitzung zu lange claude.md überladen vertrauen ohne prüfen endlos erkunden">
+  <div class="sec-head"><span class="sec-num">14</span><h2>Typische Stolperfallen</h2></div>
+  <p class="lead">Diese Muster kosten am meisten Zeit. Zum Glück ist die Lösung jeweils einfach.</p>
+
+  <details class="acc"><summary>🍲 Die Allzweck-Sitzung</summary><div class="acc-body">
+    <p><b>Problem:</b> Du fängst mit einer Aufgabe an, fragst zwischendurch etwas ganz anderes und kehrst dann zurück. Der Kontext ist voll mit Fremdem.</p>
+    <p><b>Lösung:</b> <code>/clear</code> zwischen Aufgaben, die nichts miteinander zu tun haben. Für kurze Zwischenfragen <code>/btw</code>.</p>
+  </div></details>
+  <details class="acc"><summary>🔁 Immer wieder korrigieren</summary><div class="acc-body">
+    <p><b>Problem:</b> Claude liegt daneben, du korrigierst, es liegt wieder daneben, du korrigierst wieder.</p>
+    <p><b>Lösung:</b> Nach zwei erfolglosen Korrekturen <code>/clear</code> und ein neuer, besserer Prompt mit dem, was du gelernt hast.</p>
+  </div></details>
+  <details class="acc"><summary>📚 Die überladene CLAUDE.md</summary><div class="acc-body">
+    <p><b>Problem:</b> Die Datei ist so lang, dass wichtige Zeilen untergehen. Vieles darin könnte Claude ohnehin aus dem Code lesen.</p>
+    <p><b>Lösung:</b> Nur aufschreiben, was Claude nicht selbst findet. Test: „Könnte es das im Code finden, und würde es nachsehen?“ Wenn ja, raus damit. Mehr in Kapitel 3.</p>
+  </div></details>
+  <details class="acc"><summary>🙏 Vertrauen ohne Prüfung</summary><div class="acc-body">
+    <p><b>Problem:</b> Claude sagt „fertig“, du übernimmst, und später fällt auf, dass ein Grenzfall fehlt.</p>
+    <p><b>Lösung:</b> Immer eine Prüfung mitgeben und Belege verlangen. Wenn du es nicht prüfen kannst, liefere es nicht aus.</p>
+  </div></details>
+  <details class="acc"><summary>🕳️ Endloses Erkunden</summary><div class="acc-body">
+    <p><b>Problem:</b> „Untersuch mal“ ohne Grenzen. Claude liest Hunderte Dateien und füllt den Kontext.</p>
+    <p><b>Lösung:</b> Untersuchung eng fassen („nur src/auth“) oder einem Subagenten geben, der nur eine Zusammenfassung zurückmeldet.</p>
+  </div></details>
+  <details class="acc"><summary>📣 Regeln mit Großbuchstaben</summary><div class="acc-body">
+    <p><b>Problem:</b> „WICHTIG: NIEMALS …“ in der <code>CLAUDE.md</code>, und es passiert trotzdem.</p>
+    <p><b>Lösung:</b> Was nie passieren darf, gehört in eine <code>deny</code>-Regel oder einen Hook, nicht in lauteren Text.</p>
+  </div></details>
+  <a class="source" href="https://code.claude.com/docs/de/best-practices" target="_blank" rel="noopener">📖 Original: Best Practices ↗</a>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="lesson" id="faq" data-keywords="fragen faq englisch deutsch prompt länge plan modus immer effort kosten">
+  <div class="sec-head"><span class="sec-num">?</span><h2>Häufige Fragen</h2></div>
+  <details class="acc"><summary>Muss ich auf Englisch prompten, damit es gut klappt?</summary><div class="acc-body"><p>Nein. Deutsch funktioniert genauso gut. Wichtig ist, dass der Prompt konkret ist, nicht die Sprache.</p></div></details>
+  <details class="acc"><summary>Wie lang sollte ein Prompt sein?</summary><div class="acc-body"><p>So lang wie nötig, so kurz wie möglich. Ein Satz mit Ort, Symptom und Ziel ist oft besser als ein Absatz voller Dinge, die Claude im Code ohnehin findet.</p></div></details>
+  <details class="acc"><summary>Sollte ich immer den Plan-Modus nutzen?</summary><div class="acc-body"><p>Nein. Er lohnt sich bei größeren oder unklaren Aufgaben. Bei kleinen, klaren Änderungen kostet er nur Zeit.</p></div></details>
+  <details class="acc"><summary>Bringt „denk ganz gründlich nach“ etwas?</summary><div class="acc-body"><p>Kaum. Das ist normaler Text. Wirklich mehr Denken bekommst du über <code>/effort</code> oder einmalig mit <code>ultrathink</code> im Prompt.</p></div></details>
+  <details class="acc"><summary>Verliere ich etwas mit <code>/clear</code>?</summary><div class="acc-body"><p>Nein. Das alte Gespräch bleibt gespeichert und ist über <code>/resume</code> erreichbar. Nur die neue Aufgabe startet ohne den alten Ballast.</p></div></details>
+  <details class="acc"><summary>Ist höherer Effort immer besser?</summary><div class="acc-body"><p>Nein. Er kostet mehr Zeit und Token. Bei alltäglichen Aufgaben ist das Ergebnis oft nicht besser als mit <code>medium</code>, bei <code>max</code> neigt Claude sogar zum Überdenken.</p></div></details>
+</section>
+
+<!-- ============ Quiz ============ -->
+<section class="lesson" id="quiz-sec" data-keywords="quiz test fragen prüfen">
+  <div class="sec-head"><span class="sec-num">🎯</span><h2>Quiz: Was hast du behalten?</h2></div>
+  <p class="lead">12 Fragen. Nach jeder Antwort siehst du die Erklärung.</p>
+  <div class="quiz" id="quiz"></div>
+</section>
+
+<!-- ============ Merkkarten ============ -->
+<section class="lesson" id="karten" data-keywords="merkkarten karteikarten lernkarten flashcards wiederholen">
+  <div class="sec-head"><span class="sec-num">🃏</span><h2>Merkkarten</h2></div>
+  <p class="lead">Begriff ansehen, kurz überlegen, Karte umdrehen. Pfeiltasten blättern, Leertaste dreht um.</p>
+  <div class="fc-wrap" id="flashcards"></div>
+</section>
+
+<nav class="chapter-nav">
+  <a href="kapitel-1.html"><small>← Zurück</small>Kapitel 1 · Grundlagen</a>
+  <a class="next disabled"><small>Weiter →</small>Kapitel 3 · Gedächtnis &amp; Kontext (bald)</a>
+</nav>
+
+</div>
+</main>
+</div>
+
+<footer>
+  Inhalte in eigenen Worten zusammengefasst nach der offiziellen <a href="https://code.claude.com/docs/de/overview" target="_blank" rel="noopener">Claude-Code-Dokumentation</a>. Stand: November 2026. Im Zweifel gilt das Original.
+</footer>
+
+<!-- ===================== Quizfragen ===================== -->
+<script type="application/json" id="quiz-data">
+[
+  {"q":"Was gehört in einen guten Prompt vor allem hinein?","a":["Eine Liste aller Dateien im Projekt","Was Claude nicht selbst im Code finden kann: Ort, Symptom, Ziel","Möglichst viele Höflichkeitsformeln","Die Anweisung „denk Schritt für Schritt“"],"c":1,"why":"Claude liest den Code selbst sehr gut. Hilfreich ist, was dort nicht steht: wo du suchen würdest, was genau passiert und woran man „gelöst“ erkennt.","link":"prompts"},
+  {"q":"Wie fügst du den Inhalt einer Datei direkt in deine Nachricht ein?","a":["Mit <code>#datei</code>","Mit <code>@</code> und dem Pfad","Mit <code>/read</code>","Gar nicht, Claude muss sie selbst suchen"],"c":1,"why":"Mit <code>@src/utils/auth.js</code> landet der Dateiinhalt direkt im Prompt.","link":"prompts"},
+  {"q":"Was bewirkt „denk Schritt für Schritt“ im Prompt?","a":["Es stellt die Effort-Stufe auf max","Es ist normaler Text und stupst Claude höchstens leicht an","Es aktiviert den Plan-Modus","Es startet einen Subagenten"],"c":1,"why":"Nur <code>ultrathink</code> ist ein echtes Schlüsselwort. Sonst steuerst du die Denktiefe über <code>/effort</code>.","link":"prompts"},
+  {"q":"Du weißt noch nicht genau, was du willst. Was ist ein guter Start?","a":["Einfach loslegen lassen","Claude bitten, dich zu interviewen und eine SPEC.md zu schreiben","Den bypassPermissions-Modus einschalten","Effort auf max stellen"],"c":1,"why":"Claude stellt Fragen zu allem Offenen und schreibt daraus eine Spezifikation, nach der du später bauen und prüfen kannst.","link":"interview"},
+  {"q":"Was darf Claude im Plan-Modus NICHT?","a":["Dateien lesen","Im Code suchen","Deine Quelldateien ändern, bevor du den Plan genehmigst","Einen Plan vorschlagen"],"c":2,"why":"Im Plan-Modus erkundet Claude und schlägt vor. Bearbeitet wird erst nach deiner Freigabe.","link":"plan-modus"},
+  {"q":"Mit welcher Taste öffnest du einen Plan zum Bearbeiten im Texteditor?","a":["<kbd>Ctrl</kbd>+<kbd>G</kbd>","<kbd>Ctrl</kbd>+<kbd>P</kbd>","<kbd>F2</kbd>","<kbd>Shift</kbd>+<kbd>Tab</kbd>"],"c":0,"why":"<kbd>Ctrl</kbd>+<kbd>G</kbd> öffnet den Plan in deinem Editor. Achtung: <kbd>Shift</kbd>+<kbd>Tab</kbd> würde in der Abfrage den Plan genehmigen.","link":"plan-modus"},
+  {"q":"Warum solltest du Claude eine Prüfung mitgeben?","a":["Damit es schneller tippt","Damit es selbst erkennt, ob die Arbeit wirklich funktioniert, und weiterarbeitet","Weil es sonst nichts speichert","Weil Tests Pflicht sind"],"c":1,"why":"Ohne Prüfung bleibt Claude nur „sieht fertig aus“. Mit Test, Build oder Linter schließt es die Schleife selbst.","link":"pruefen"},
+  {"q":"Welche Prüfung wird von Claude Code erzwungen, egal was das Modell denkt?","a":["Die Bitte im Prompt","Ein Stop-Hook","Eine Zeile in der CLAUDE.md","Ein freundliches „bitte prüf das“"],"c":1,"why":"Ein Stop-Hook läuft bei jedem Versuch aufzuhören und schickt Claude zurück, solange das Skript fehlschlägt.","link":"pruefen"},
+  {"q":"Wohin gehört „Lies niemals die Datei .env“?","a":["In die CLAUDE.md, in Großbuchstaben","In den Prompt","In eine deny-Regel","In eine SPEC.md"],"c":2,"why":"Was nie passieren darf, gehört in eine feste Regel, die Claude Code durchsetzt. Die CLAUDE.md ist für Richtlinien mit Ausnahmen.","link":"regeln"},
+  {"q":"Du hast Claude zweimal korrigiert, es stimmt immer noch nicht. Was nun?","a":["Eine dritte, noch genauere Korrektur","<code>/clear</code> und ein neuer, besserer Prompt mit dem Gelernten","Effort auf max","Claude Code neu installieren"],"c":1,"why":"Jede Korrektur bleibt im Verlauf. Ein frischer Start mit besserem Prompt klappt fast immer besser.","link":"steuern"},
+  {"q":"Welche Effort-Stufe passt zu einem schnellen Brainstorming?","a":["<code>low</code>","<code>high</code>","<code>xhigh</code>","<code>max</code>"],"c":0,"why":"Bei schnellem Hin und Her, bei dem du jedes Ergebnis ohnehin prüfst, bringt mehr Denken kaum etwas außer Wartezeit.","link":"effort"},
+  {"q":"Was macht <code>/clear</code> zwischen zwei unabhängigen Aufgaben?","a":["Es löscht das alte Gespräch für immer","Es sorgt dafür, dass die neue Aufgabe nicht für den alten Verlauf bezahlt","Es setzt alle Dateien zurück","Es beendet Claude Code"],"c":1,"why":"Jede Anfrage schickt den Verlauf mit. <code>/clear</code> kostet nichts, das alte Gespräch bleibt über <code>/resume</code> erreichbar.","link":"kosten"}
+]
+</script>
+
+<!-- ===================== Merkkarten ===================== -->
+<script type="application/json" id="cards-data">
+[
+  {"f":"Die vier Ursachen","b":"Es fehlt Wissen, es fehlt eine Prüfung, eine Regel wurde nicht durchgesetzt oder eine Voreinstellung passt nicht."},
+  {"f":"Ort, Symptom, Ziel","b":"Faustregel für gute Prompts: wo suchen, was genau passiert, woran man erkennt, dass es gelöst ist."},
+  {"f":"<code>@datei</code>","b":"Fügt den Inhalt einer Datei (oder mit <code>@ordner/</code> eines Verzeichnisses) direkt in deine Nachricht ein."},
+  {"f":"„Sei ambitioniert“","b":"Sagt Claude, dass du die umfassende Version willst: Grenzfälle, Fehlerzustände, der naheliegende nächste Schritt."},
+  {"f":"Interview + SPEC.md","b":"Claude stellt Fragen, bis es eine Spezifikation schreiben kann. Danach frisch starten und danach bauen."},
+  {"f":"Erkunden → Planen → Umsetzen → Prüfen","b":"Der bewährte Ablauf für größere oder unklare Aufgaben. Bei kleinen Änderungen direkt loslegen."},
+  {"f":"Plan-Modus","b":"Claude liest und plant, ändert aber nichts, bis du genehmigst. Rein mit <kbd>Shift</kbd>+<kbd>Tab</kbd> oder <code>/plan</code>."},
+  {"f":"<kbd>Ctrl</kbd>+<kbd>G</kbd>","b":"Öffnet den vorgeschlagenen Plan in deinem Texteditor zum direkten Bearbeiten."},
+  {"f":"Prüfung mitgeben","b":"Etwas, das mit bestanden/fehlgeschlagen antwortet: Tests, Build, Linter, Screenshot. Und Belege verlangen."},
+  {"f":"<code>/goal</code>","b":"Legt eine Zielbedingung fest. Ein zweites Modell prüft nach jedem Durchgang, ob sie erfüllt ist."},
+  {"f":"<code>/code-review</code>","b":"Ein frischer Subagent prüft deine Änderungen, ohne das Gespräch zu kennen, das zum Code geführt hat."},
+  {"f":"Bitte vs. Regel","b":"Bitte (Prompt, CLAUDE.md): Claude entscheidet. Regel (Hook, deny): Claude Code setzt es jedes Mal durch."},
+  {"f":"Zwei-Korrekturen-Regel","b":"Nach zwei erfolglosen Korrekturen lieber <code>/clear</code> und ein besserer Prompt statt einer dritten Korrektur."},
+  {"f":"<code>/rewind</code>","b":"Spult Code, Gespräch oder beides zu einem früheren Prompt zurück. Auch mit <kbd>Esc</kbd> <kbd>Esc</kbd> oder <code>/undo</code>."},
+  {"f":"Effort-Stufen","b":"<code>low</code> · <code>medium</code> (Standard) · <code>high</code> · <code>xhigh</code> · <code>max</code>. Einstellen mit <code>/effort</code>."},
+  {"f":"<code>ultrathink</code>","b":"Schlüsselwort im Prompt: nur für diese eine Nachricht tiefer nachdenken, ohne die Einstellung zu ändern."}
+]
+</script>
+
+<script src="assets/search-index.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

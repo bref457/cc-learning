@@ -8,6 +8,7 @@ Einfach `index.html` im Browser öffnen, kein Server nötig.
 ```
 index.html            Startseite mit allen Kapiteln
 kapitel-1.html        Kapitel 1 · Grundlagen
+kapitel-2.html        Kapitel 2 · Richtig arbeiten
 assets/style.css      gemeinsames Design (hell/dunkel)
 assets/app.js         Suche, Tabs, Kopieren, Quiz, Merkkarten
 assets/search-index.js  Suchindex (automatisch erzeugt)
